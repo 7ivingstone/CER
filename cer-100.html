@@ -1,0 +1,1274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>100 Habits to Steal · The CER Sticker Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Caprasimo&family=Funnel+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #fff1c6;
+    --paper-2: #ffe9a8;
+    --ink: #18181a;
+    --ink-soft: #4a4a52;
+    --coral: #ff5b4f;
+    --hot-pink: #ff3d8a;
+    --blue: #2e6dff;
+    --mint: #1fc4a8;
+    --yellow: #ffce29;
+    --lilac: #b58cff;
+    --line-thick: 3px solid var(--ink);
+    --line-thin: 2px solid var(--ink);
+    --shadow: 6px 6px 0 var(--ink);
+    --shadow-lg: 10px 10px 0 var(--ink);
+    --shadow-sm: 4px 4px 0 var(--ink);
+
+    --display: "Bagel Fat One", "Caprasimo", system-ui, sans-serif;
+    --sub: "Caprasimo", "Bagel Fat One", system-ui, serif;
+    --sans: "Funnel Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "DM Mono", "JetBrains Mono", "Courier New", monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(24,24,26,0.07) 1px, transparent 0);
+    background-size: 22px 22px;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Floating squiggles in the background */
+  .squiggle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* HEADER ------------------------------------------------------ */
+  header.top {
+    padding: 56px clamp(20px, 6vw, 90px) 36px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .stamp {
+    display: inline-block;
+    padding: 6px 14px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transform: rotate(-2deg);
+  }
+
+  .stamp.coral { background: var(--coral); color: var(--ink); border: var(--line-thin); }
+  .stamp.blue { background: var(--blue); color: var(--paper); border: var(--line-thin); transform: rotate(1.5deg); }
+  .stamp.pink { background: var(--hot-pink); color: var(--paper); border: var(--line-thin); transform: rotate(-1deg); }
+
+  h1.title {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(64px, 13vw, 188px);
+    line-height: 0.86;
+    letter-spacing: -0.02em;
+    margin: 16px 0 8px;
+  }
+
+  h1.title .L1 { color: var(--coral); display: inline-block; transform: rotate(-2deg); }
+  h1.title .L2 { color: var(--ink); }
+  h1.title .L3 { color: var(--blue); display: inline-block; transform: rotate(2deg); }
+  h1.title .L4 { color: var(--mint); }
+  h1.title .L5 { color: var(--hot-pink); display: inline-block; transform: rotate(-1deg); }
+
+  .subline {
+    font-family: var(--sub);
+    font-weight: 400;
+    font-size: clamp(20px, 2.4vw, 28px);
+    color: var(--ink-soft);
+    margin-top: 18px;
+    max-width: 38ch;
+    line-height: 1.2;
+  }
+
+  .what-is-cer {
+    margin-top: 30px;
+    display: inline-block;
+    background: var(--paper-2);
+    border: var(--line-thick);
+    box-shadow: var(--shadow);
+    padding: 18px 22px;
+    max-width: 560px;
+    transform: rotate(-0.6deg);
+    position: relative;
+  }
+
+  .what-is-cer::before {
+    content: "WHAT'S CER?";
+    position: absolute;
+    top: -14px;
+    left: 16px;
+    background: var(--yellow);
+    border: var(--line-thin);
+    padding: 3px 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    transform: rotate(-3deg);
+  }
+
+  .what-is-cer p {
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .what-is-cer strong {
+    font-family: var(--sub);
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--coral);
+  }
+
+  /* TAB STRIP --------------------------------------------------- */
+  nav.tabs {
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    padding: 14px clamp(20px, 6vw, 90px);
+    z-index: 50;
+    border-bottom: var(--line-thick);
+  }
+
+  .tabs-row {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    align-items: center;
+    scrollbar-width: none;
+    flex-wrap: wrap;
+  }
+
+  .tabs-row::-webkit-scrollbar { display: none; }
+
+  .tab {
+    flex-shrink: 0;
+    padding: 10px 18px;
+    background: var(--paper-2);
+    color: var(--ink);
+    border: var(--line-thick);
+    box-shadow: var(--shadow-sm);
+    font-family: var(--sub);
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    user-select: none;
+  }
+
+  .tab:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+
+  .tab.active {
+    background: var(--coral);
+    color: var(--paper);
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--ink);
+  }
+
+  .tab .n {
+    font-family: var(--mono);
+    font-size: 10px;
+    margin-right: 6px;
+    opacity: 0.6;
+  }
+
+  .tab.active .n { opacity: 0.9; }
+
+  .shuffle-btn {
+    margin-left: auto;
+    padding: 10px 18px;
+    background: var(--yellow);
+    border: var(--line-thick);
+    box-shadow: var(--shadow-sm);
+    font-family: var(--sub);
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: transform 120ms ease, box-shadow 120ms ease;
+  }
+
+  .shuffle-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+  .shuffle-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+  }
+
+  .search-wrap input {
+    font-family: var(--sans);
+    font-size: 14px;
+    background: var(--paper-2);
+    border: var(--line-thin);
+    padding: 8px 12px;
+    width: 200px;
+    color: var(--ink);
+    outline: none;
+    transition: width 200ms ease, background 200ms;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+
+  .search-wrap input:focus { background: var(--mint); width: 240px; }
+  .search-wrap input::placeholder { color: var(--ink-soft); }
+  .search-wrap.hidden { display: none; }
+
+  /* MAIN -------------------------------------------------------- */
+  main { padding: 40px clamp(20px, 6vw, 90px) 80px; position: relative; z-index: 1; }
+
+  .view { display: none; animation: pop 380ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  .view.active { display: block; }
+
+  @keyframes pop {
+    from { opacity: 0; transform: scale(0.96) translateY(12px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* TIER SECTIONS ---------------------------------------------- */
+  section.tier { margin-bottom: 60px; position: relative; }
+
+  .tier-banner {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .tier-letter {
+    font-family: var(--display);
+    font-size: clamp(72px, 9vw, 130px);
+    line-height: 0.85;
+    background: var(--coral);
+    color: var(--paper);
+    padding: 8px 28px;
+    border: var(--line-thick);
+    box-shadow: var(--shadow);
+    transform: rotate(-3deg);
+    display: inline-block;
+  }
+
+  .tier-A .tier-letter { background: var(--blue); }
+  .tier-B .tier-letter { background: var(--mint); }
+  .tier-C .tier-letter { background: var(--yellow); color: var(--ink); }
+
+  .tier-meta { display: flex; flex-direction: column; gap: 4px; }
+
+  .tier-meta .count {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .tier-meta .name {
+    font-family: var(--sub);
+    font-size: clamp(22px, 2.6vw, 32px);
+    line-height: 1.05;
+    color: var(--ink);
+  }
+
+  .squiggle-divider {
+    width: 100%;
+    height: 14px;
+    margin: 8px 0 28px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 14' preserveAspectRatio='none'><path d='M0 7 Q 10 0, 20 7 T 40 7 T 60 7 T 80 7' fill='none' stroke='%2318181a' stroke-width='2.5' stroke-linecap='round'/></svg>");
+    background-repeat: repeat-x;
+    background-size: 80px 14px;
+  }
+
+  /* CARDS / STICKERS ------------------------------------------- */
+  .grid { display: grid; gap: 18px; }
+  .grid-S { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
+  .grid-A { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .grid-B { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .grid-C { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+
+  .card {
+    background: var(--paper);
+    border: var(--line-thick);
+    box-shadow: var(--shadow);
+    padding: 18px 20px 16px;
+    position: relative;
+    transition: transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 180ms;
+    cursor: default;
+  }
+
+  /* Random small rotations using nth-child */
+  .card:nth-child(5n+1) { transform: rotate(-1.2deg); }
+  .card:nth-child(5n+2) { transform: rotate(0.8deg); }
+  .card:nth-child(5n+3) { transform: rotate(-0.6deg); }
+  .card:nth-child(5n+4) { transform: rotate(1.4deg); }
+  .card:nth-child(5n+5) { transform: rotate(-1.8deg); }
+
+  .card:hover {
+    transform: rotate(0) translate(-3px, -3px) scale(1.02);
+    box-shadow: 10px 10px 0 var(--ink);
+    z-index: 5;
+  }
+
+  .card .num-badge {
+    position: absolute;
+    top: -14px;
+    left: -14px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    border: var(--line-thin);
+    transform: rotate(-6deg);
+  }
+
+  .card .title {
+    font-family: var(--sub);
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-top: 4px;
+  }
+
+  .card .blurb {
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin-top: 8px;
+  }
+
+  /* Tier S styling */
+  .tier-S .card {
+    background: linear-gradient(135deg, var(--paper) 0%, var(--paper-2) 100%);
+    padding: 26px 24px 22px;
+    border-width: 3px;
+  }
+
+  .tier-S .card .num-badge {
+    background: var(--coral);
+    color: var(--ink);
+    width: 44px;
+    height: 44px;
+    font-size: 13px;
+  }
+
+  .tier-S .card .title { font-size: 22px; }
+
+  .tier-S .card::after {
+    content: "✦";
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    font-size: 20px;
+    color: var(--coral);
+  }
+
+  /* Tier A */
+  .tier-A .card .num-badge { background: var(--blue); color: var(--paper); }
+  .tier-A .card { background: var(--paper); }
+
+  /* Tier B */
+  .tier-B .card { padding: 14px 16px 14px; }
+  .tier-B .card .num-badge { background: var(--mint); color: var(--ink); width: 32px; height: 32px; font-size: 11px; top: -12px; left: -12px; }
+  .tier-B .card .title { font-size: 16px; }
+
+  /* Tier C */
+  .tier-C .card { padding: 12px 14px; background: transparent; box-shadow: 4px 4px 0 var(--ink); border-width: 2px; }
+  .tier-C .card .num-badge { background: var(--yellow); color: var(--ink); width: 28px; height: 28px; font-size: 10px; top: -10px; left: -10px; }
+  .tier-C .card .title { font-size: 14px; line-height: 1.25; }
+
+  .card.hidden { display: none; }
+
+  .card.flash {
+    animation: flash 1400ms ease-out;
+  }
+
+  @keyframes flash {
+    0%   { background: var(--paper); }
+    20%  { background: var(--yellow); transform: rotate(0) scale(1.06); }
+    50%  { background: var(--yellow); }
+    100% { background: var(--paper); }
+  }
+
+  /* NCER (Negatively Compounding Energy Return) -------------- */
+  .tier-NCER .tier-letter {
+    background: var(--hot-pink);
+    color: var(--paper);
+  }
+
+  .ncer-intro {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 22px 26px;
+    border: var(--line-thick);
+    box-shadow: 6px 6px 0 var(--hot-pink);
+    margin-bottom: 32px;
+    font-family: var(--sans);
+    font-size: 15.5px;
+    line-height: 1.55;
+    transform: rotate(-0.4deg);
+    position: relative;
+  }
+
+  .ncer-intro::before {
+    content: "WHAT'S NCER?";
+    position: absolute;
+    top: -14px;
+    left: 18px;
+    background: var(--hot-pink);
+    color: var(--paper);
+    border: var(--line-thin);
+    padding: 3px 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    transform: rotate(-3deg);
+  }
+
+  .ncer-intro strong {
+    font-family: var(--sub);
+    font-size: 18px;
+    color: var(--hot-pink);
+  }
+
+  .ncer-sublabel {
+    display: inline-block;
+    background: var(--hot-pink);
+    color: var(--paper);
+    border: var(--line-thin);
+    padding: 6px 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin: 18px 0 18px;
+    transform: rotate(-1deg);
+  }
+
+  .grid-NCER-S { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
+  .grid-NCER-A { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+
+  .ncer-card {
+    background: #1a0e10;
+    color: var(--paper);
+    border: var(--line-thick);
+    box-shadow: 6px 6px 0 var(--hot-pink);
+    padding: 22px 22px 18px;
+    position: relative;
+    transition: transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 180ms;
+  }
+
+  .ncer-card:nth-child(5n+1) { transform: rotate(0.8deg); }
+  .ncer-card:nth-child(5n+2) { transform: rotate(-1.2deg); }
+  .ncer-card:nth-child(5n+3) { transform: rotate(0.4deg); }
+  .ncer-card:nth-child(5n+4) { transform: rotate(-0.6deg); }
+  .ncer-card:nth-child(5n+5) { transform: rotate(1.4deg); }
+
+  .ncer-card:hover {
+    transform: rotate(0) translate(-3px, -3px) scale(1.02);
+    box-shadow: 10px 10px 0 var(--hot-pink);
+    z-index: 5;
+  }
+
+  .ncer-card .num-badge {
+    background: var(--hot-pink);
+    color: var(--paper);
+    border: var(--line-thin);
+  }
+
+  .ncer-card .title {
+    font-family: var(--sub);
+    font-size: 19px;
+    line-height: 1.15;
+    color: var(--paper);
+    margin-top: 4px;
+  }
+
+  .ncer-card .blurb {
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: rgba(255, 241, 198, 0.7);
+    margin-top: 8px;
+  }
+
+  .ncer-card::after {
+    content: "↯";
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    font-size: 22px;
+    color: var(--yellow);
+    font-weight: 700;
+  }
+
+  .grid-NCER-A .ncer-card { padding: 16px 18px 14px; }
+  .grid-NCER-A .ncer-card .title { font-size: 17px; }
+
+  /* DECADE HERO ----------------------------------------------- */
+  .decade-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-bottom: 44px;
+    align-items: start;
+  }
+
+  @media (min-width: 880px) {
+    .decade-hero { grid-template-columns: auto 1fr; gap: 40px; align-items: center; }
+  }
+
+  .decade-badge {
+    font-family: var(--display);
+    font-size: clamp(96px, 16vw, 220px);
+    line-height: 0.85;
+    color: var(--paper);
+    background: var(--hot-pink);
+    padding: 18px 36px;
+    border: 4px solid var(--ink);
+    box-shadow: var(--shadow-lg);
+    display: inline-block;
+    transform: rotate(-3deg);
+    text-align: center;
+  }
+
+  .twenties .decade-badge { background: var(--coral); }
+  .thirties .decade-badge { background: var(--blue); }
+  .forties .decade-badge { background: var(--mint); color: var(--ink); }
+  .fifties .decade-badge { background: var(--lilac); }
+  .sixties .decade-badge { background: var(--yellow); color: var(--ink); }
+
+  .decade-headline {
+    font-family: var(--sub);
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: 1;
+    margin-bottom: 14px;
+    color: var(--ink);
+    max-width: 16ch;
+  }
+
+  .decade-prose {
+    font-family: var(--sans);
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 56ch;
+  }
+
+  .section-tag {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    margin-bottom: 18px;
+    transform: rotate(-1.5deg);
+  }
+
+  .anchors {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+    margin-bottom: 50px;
+  }
+
+  .anchor {
+    background: var(--paper);
+    border: var(--line-thick);
+    box-shadow: var(--shadow);
+    padding: 22px 22px 20px;
+    position: relative;
+    transition: transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 180ms;
+  }
+
+  .anchor:nth-child(4n+1) { transform: rotate(-1deg); }
+  .anchor:nth-child(4n+2) { transform: rotate(1.2deg); }
+  .anchor:nth-child(4n+3) { transform: rotate(-0.5deg); }
+  .anchor:nth-child(4n+4) { transform: rotate(0.8deg); }
+
+  .anchor:hover {
+    transform: rotate(0) translate(-3px, -3px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .anchor-tag {
+    position: absolute;
+    top: -12px;
+    right: 16px;
+    background: var(--coral);
+    color: var(--ink);
+    border: var(--line-thin);
+    padding: 3px 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transform: rotate(3deg);
+  }
+
+  .anchor-title {
+    font-family: var(--sub);
+    font-size: 22px;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .anchor-note {
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  /* RISKS BLOCK ----------------------------------------------- */
+  .risks {
+    background: var(--hot-pink);
+    color: var(--paper);
+    border: var(--line-thick);
+    box-shadow: var(--shadow-lg);
+    padding: 28px 32px;
+    margin-top: 24px;
+    transform: rotate(-0.4deg);
+    position: relative;
+  }
+
+  .risks::before {
+    content: "DANGER ZONE";
+    position: absolute;
+    top: -14px;
+    left: 18px;
+    background: var(--ink);
+    color: var(--yellow);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    padding: 4px 10px;
+    border: var(--line-thin);
+    transform: rotate(-3deg);
+  }
+
+  .risks-head {
+    font-family: var(--sub);
+    font-size: 24px;
+    margin-bottom: 14px;
+    color: var(--paper);
+  }
+
+  .risks-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .risks-list li {
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.35;
+    padding-left: 22px;
+    position: relative;
+    color: var(--paper);
+  }
+
+  .risks-list li::before {
+    content: "↯";
+    position: absolute;
+    left: 0;
+    color: var(--yellow);
+    font-family: var(--mono);
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  /* FOOTER ---------------------------------------------------- */
+  footer {
+    padding: 32px clamp(20px, 6vw, 90px);
+    border-top: var(--line-thick);
+    margin-top: 60px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  footer .stamp.outline {
+    background: transparent;
+    color: var(--paper);
+    border: 2px solid var(--paper);
+  }
+
+  /* RESPONSIVE ------------------------------------------------ */
+  @media (max-width: 720px) {
+    .top-bar { font-size: 10px; }
+    .tab { padding: 8px 14px; font-size: 13px; }
+    .search-wrap input { width: 140px; }
+    .search-wrap input:focus { width: 160px; }
+  }
+
+  @media print {
+    body { background: white; }
+    nav.tabs, .shuffle-btn, .search-wrap, footer { display: none; }
+    .view { display: block !important; page-break-before: always; }
+    .card, .anchor { break-inside: avoid; box-shadow: none; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Decorative squiggles in the background -->
+<svg class="squiggle" style="top: 200px; right: 5%;" width="120" height="60" viewBox="0 0 120 60">
+  <path d="M5 30 Q 20 5, 35 30 T 65 30 T 95 30 T 115 30" fill="none" stroke="var(--blue)" stroke-width="3" stroke-linecap="round"/>
+</svg>
+<svg class="squiggle" style="top: 600px; left: 3%;" width="80" height="80" viewBox="0 0 80 80">
+  <circle cx="40" cy="40" r="30" fill="none" stroke="var(--mint)" stroke-width="3" stroke-dasharray="6 8"/>
+</svg>
+<svg class="squiggle" style="top: 1100px; right: 6%;" width="60" height="60" viewBox="0 0 60 60">
+  <polygon points="30,5 36,22 54,22 39,33 45,52 30,40 15,52 21,33 6,22 24,22" fill="var(--yellow)" stroke="var(--ink)" stroke-width="2.5"/>
+</svg>
+
+<header class="top">
+  <div class="top-bar">
+    <span class="stamp">Vol. 01 · Sticker Edition</span>
+    <span class="stamp coral">Pick 5. Stick 'em up.</span>
+  </div>
+
+  <h1 class="title">
+    <span class="L1">100</span> <span class="L2">habits</span><br>
+    <span class="L3">to</span> <span class="L4">steal</span> <span class="L5">★</span>
+  </h1>
+
+  <p class="subline">A scrappy field guide to the actions that pay you back in energy, instead of draining you dry.</p>
+
+  <div class="what-is-cer">
+    <p><strong>CER</strong> stands for Compounding Energy Return. It asks one question. Does this hour, decision, or commitment pay back more usable energy than it costs? Four ledgers count. Body. Mind. Heart. Room.</p>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabs-row" role="tablist">
+    <button class="tab active" data-view="lifetime" role="tab" aria-selected="true"><span class="n">00</span>Lifetime</button>
+    <button class="tab" data-view="twenties" role="tab"><span class="n">01</span>20s</button>
+    <button class="tab" data-view="thirties" role="tab"><span class="n">02</span>30s</button>
+    <button class="tab" data-view="forties" role="tab"><span class="n">03</span>40s</button>
+    <button class="tab" data-view="fifties" role="tab"><span class="n">04</span>50s</button>
+    <button class="tab" data-view="sixties" role="tab"><span class="n">05</span>60s</button>
+    <div class="search-wrap" id="searchWrap">
+      <input id="searchBox" type="text" placeholder="find a sticker..." aria-label="filter actions" />
+    </div>
+    <button class="shuffle-btn" id="shuffleBtn">★ Shuffle ★</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- LIFETIME ================================================== -->
+<section class="view active" id="lifetime" role="tabpanel">
+
+  <!-- TIER S -->
+  <section class="tier tier-S">
+    <div class="tier-banner">
+      <div class="tier-letter">S</div>
+      <div class="tier-meta">
+        <span class="count">Top 10 · Holy Grail Tier</span>
+        <span class="name">The ten that bend the whole curve</span>
+      </div>
+    </div>
+    <div class="squiggle-divider"></div>
+    <div class="grid grid-S">
+      <article class="card"><div class="num-badge">01</div><div class="title">Sleep 7 to 9 hours, every night</div><div class="blurb">Skip this and the rest of the list leaks out the bottom.</div></article>
+      <article class="card"><div class="num-badge">02</div><div class="title">Move daily, aerobic plus strength</div><div class="blurb">Buys the engine and the frame. Almost nothing pays better.</div></article>
+      <article class="card"><div class="num-badge">03</div><div class="title">Whole food with a protein floor</div><div class="blurb">Boring works. Eat the chicken. Feed the brain.</div></article>
+      <article class="card"><div class="num-badge">04</div><div class="title">Long-term partnership with the right person</div><div class="blurb">Biggest compounder going. The wrong one is the biggest leak.</div></article>
+      <article class="card"><div class="num-badge">05</div><div class="title">Journal or sit, daily</div><div class="blurb">Patterns reveal themselves to people who actually look.</div></article>
+      <article class="card"><div class="num-badge">06</div><div class="title">Save a fixed percent of income</div><div class="blurb">Time does the heavy lifting. You just keep saving.</div></article>
+      <article class="card"><div class="num-badge">07</div><div class="title">Get good at one craft</div><div class="blurb">Pick one thing. Be the weirdo who gets seriously good.</div></article>
+      <article class="card"><div class="num-badge">08</div><div class="title">Do work that pays back the worker</div><div class="blurb">Purpose lowers the cost of every hour you put in.</div></article>
+      <article class="card"><div class="num-badge">09</div><div class="title">Read daily, across topics</div><div class="blurb">Cheapest way to borrow other people's minds.</div></article>
+      <article class="card"><div class="num-badge">10</div><div class="title">Give to others, regularly</div><div class="blurb">Generosity compounds inside the giver first.</div></article>
+    </div>
+  </section>
+
+  <!-- TIER A -->
+  <section class="tier tier-A">
+    <div class="tier-banner">
+      <div class="tier-letter">A</div>
+      <div class="tier-meta">
+        <span class="count">20 Items · Strong Tier</span>
+        <span class="name">The next 20 that move the needle</span>
+      </div>
+    </div>
+    <div class="squiggle-divider"></div>
+    <div class="grid grid-A">
+      <article class="card"><div class="num-badge">11</div><div class="title">Deep work blocks daily</div><div class="blurb">Two to four hours, no distractions. The unit of real output.</div></article>
+      <article class="card"><div class="num-badge">12</div><div class="title">Morning sun and outside time</div><div class="blurb">Anchors the body clock. Mood and sleep follow.</div></article>
+      <article class="card"><div class="num-badge">13</div><div class="title">Make something on a regular cadence</div><div class="blurb">Ship anything. Identity follows action.</div></article>
+      <article class="card"><div class="num-badge">14</div><div class="title">Spiritual or contemplative practice</div><div class="blurb">Sit, pray, breathe, walk in silence. Lower the noise floor.</div></article>
+      <article class="card"><div class="num-badge">15</div><div class="title">Keep old friendships alive</div><div class="blurb">Voice notes. Random texts. Showing up.</div></article>
+      <article class="card"><div class="num-badge">16</div><div class="title">Build a couple of new deep friends</div><div class="blurb">Most adults stop. The ones who keep going are richer for it.</div></article>
+      <article class="card"><div class="num-badge">17</div><div class="title">Walk 7 to 10k steps a day</div><div class="blurb">Cheap, underrated, gives you everything.</div></article>
+      <article class="card"><div class="num-badge">18</div><div class="title">Strength train three times a week</div><div class="blurb">Buys mobility and dignity into your eighties.</div></article>
+      <article class="card"><div class="num-badge">19</div><div class="title">Cook your own food</div><div class="blurb">Quality, cost, agency. A skill that pays for life.</div></article>
+      <article class="card"><div class="num-badge">20</div><div class="title">Drink water like you mean it</div><div class="blurb">Boring. Foundational. Your brain runs on it.</div></article>
+      <article class="card"><div class="num-badge">21</div><div class="title">Breathwork</div><div class="blurb">A switch most people never find on themselves.</div></article>
+      <article class="card"><div class="num-badge">22</div><div class="title">Annual blood panel</div><div class="blurb">Early detection saves whole decades.</div></article>
+      <article class="card"><div class="num-badge">23</div><div class="title">Brush and floss, every day</div><div class="blurb">Five minutes. Saves teeth and tens of thousands of dollars.</div></article>
+      <article class="card"><div class="num-badge">24</div><div class="title">Sun protection</div><div class="blurb">Skin damage compounds. Hat, sunscreen, shade.</div></article>
+      <article class="card"><div class="num-badge">25</div><div class="title">Read nonfiction</div><div class="blurb">Borrow expertise. Steal patterns from other domains.</div></article>
+      <article class="card"><div class="num-badge">26</div><div class="title">Read fiction</div><div class="blurb">Empathy gym. Sleep aid. Imagination repair.</div></article>
+      <article class="card"><div class="num-badge">27</div><div class="title">Write regularly</div><div class="blurb">Thinking made visible. Sharpens the mind that produced it.</div></article>
+      <article class="card"><div class="num-badge">28</div><div class="title">Teach or mentor someone</div><div class="blurb">Forces you to learn twice. Standing comes with it.</div></article>
+      <article class="card"><div class="num-badge">29</div><div class="title">Say no to misaligned commitments</div><div class="blurb">Every no protects a yes that actually matters.</div></article>
+      <article class="card"><div class="num-badge">30</div><div class="title">Volunteer or join a community</div><div class="blurb">Roots you in place and people. The opposite of drift.</div></article>
+    </div>
+  </section>
+
+  <!-- TIER B -->
+  <section class="tier tier-B">
+    <div class="tier-banner">
+      <div class="tier-letter">B</div>
+      <div class="tier-meta">
+        <span class="count">30 Items · Real Tier</span>
+        <span class="name">Solid moves with narrower payoff</span>
+      </div>
+    </div>
+    <div class="squiggle-divider"></div>
+    <div class="grid grid-B">
+      <article class="card"><div class="num-badge">31</div><div class="title">Monthly finance tracking</div></article>
+      <article class="card"><div class="num-badge">32</div><div class="title">Emergency fund discipline</div></article>
+      <article class="card"><div class="num-badge">33</div><div class="title">No lifestyle creep</div></article>
+      <article class="card"><div class="num-badge">34</div><div class="title">Low-stakes hobbies and play</div></article>
+      <article class="card"><div class="num-badge">35</div><div class="title">Weekly time in nature</div></article>
+      <article class="card"><div class="num-badge">36</div><div class="title">Cold exposure</div></article>
+      <article class="card"><div class="num-badge">37</div><div class="title">Sauna</div></article>
+      <article class="card"><div class="num-badge">38</div><div class="title">Mobility work</div></article>
+      <article class="card"><div class="num-badge">39</div><div class="title">Posture practice</div></article>
+      <article class="card"><div class="num-badge">40</div><div class="title">Cut ultra-processed food</div></article>
+      <article class="card"><div class="num-badge">41</div><div class="title">Less or no alcohol</div></article>
+      <article class="card"><div class="num-badge">42</div><div class="title">No smoking or vaping</div></article>
+      <article class="card"><div class="num-badge">43</div><div class="title">Limit screen time</div></article>
+      <article class="card"><div class="num-badge">44</div><div class="title">Phone-free mornings</div></article>
+      <article class="card"><div class="num-badge">45</div><div class="title">Single-task on purpose</div></article>
+      <article class="card"><div class="num-badge">46</div><div class="title">Say hard truths early</div></article>
+      <article class="card"><div class="num-badge">47</div><div class="title">Full apologies when wrong</div></article>
+      <article class="card"><div class="num-badge">48</div><div class="title">Gratitude practice</div></article>
+      <article class="card"><div class="num-badge">49</div><div class="title">Therapy or coaching when stuck</div></article>
+      <article class="card"><div class="num-badge">50</div><div class="title">Annual solo retreat</div></article>
+      <article class="card"><div class="num-badge">51</div><div class="title">Long thinking walks</div></article>
+      <article class="card"><div class="num-badge">52</div><div class="title">Quality time with parents while alive</div></article>
+      <article class="card"><div class="num-badge">53</div><div class="title">Track sleep</div></article>
+      <article class="card"><div class="num-badge">54</div><div class="title">Track workouts</div></article>
+      <article class="card"><div class="num-badge">55</div><div class="title">Hard thing first, every day</div></article>
+      <article class="card"><div class="num-badge">56</div><div class="title">Weekly desk reset</div></article>
+      <article class="card"><div class="num-badge">57</div><div class="title">Quarterly direction review</div></article>
+      <article class="card"><div class="num-badge">58</div><div class="title">Annual life audit</div></article>
+      <article class="card"><div class="num-badge">59</div><div class="title">Read biographies</div></article>
+      <article class="card"><div class="num-badge">60</div><div class="title">Study one master per year</div></article>
+    </div>
+  </section>
+
+  <!-- TIER C -->
+  <section class="tier tier-C">
+    <div class="tier-banner">
+      <div class="tier-letter">C</div>
+      <div class="tier-meta">
+        <span class="count">40 Items · Spice Rack Tier</span>
+        <span class="name">Smaller compounders, taste to fit</span>
+      </div>
+    </div>
+    <div class="squiggle-divider"></div>
+    <div class="grid grid-C">
+      <article class="card"><div class="num-badge">61</div><div class="title">Negotiate rates and raises</div></article>
+      <article class="card"><div class="num-badge">62</div><div class="title">Invest in daily-use tools</div></article>
+      <article class="card"><div class="num-badge">63</div><div class="title">Clean physical environment</div></article>
+      <article class="card"><div class="num-badge">64</div><div class="title">Time across generations</div></article>
+      <article class="card"><div class="num-badge">65</div><div class="title">Vitamin D</div></article>
+      <article class="card"><div class="num-badge">66</div><div class="title">Omega-3</div></article>
+      <article class="card"><div class="num-badge">67</div><div class="title">Magnesium</div></article>
+      <article class="card"><div class="num-badge">68</div><div class="title">Creatine</div></article>
+      <article class="card"><div class="num-badge">69</div><div class="title">Mobility drills</div></article>
+      <article class="card"><div class="num-badge">70</div><div class="title">Massage or foam rolling</div></article>
+      <article class="card"><div class="num-badge">71</div><div class="title">Eat more fiber</div></article>
+      <article class="card"><div class="num-badge">72</div><div class="title">Fermented foods</div></article>
+      <article class="card"><div class="num-badge">73</div><div class="title">Cool sleeping room</div></article>
+      <article class="card"><div class="num-badge">74</div><div class="title">Dark sleeping room</div></article>
+      <article class="card"><div class="num-badge">75</div><div class="title">No late caffeine</div></article>
+      <article class="card"><div class="num-badge">76</div><div class="title">Weekly family or friend dinner</div></article>
+      <article class="card"><div class="num-badge">77</div><div class="title">Monthly long-distance friend call</div></article>
+      <article class="card"><div class="num-badge">78</div><div class="title">Spaced repetition for learning</div></article>
+      <article class="card"><div class="num-badge">79</div><div class="title">Second-brain note system</div></article>
+      <article class="card"><div class="num-badge">80</div><div class="title">Calendar batching</div></article>
+      <article class="card"><div class="num-badge">81</div><div class="title">Auto-split your paycheck</div></article>
+      <article class="card"><div class="num-badge">82</div><div class="title">Quarterly expense audit</div></article>
+      <article class="card"><div class="num-badge">83</div><div class="title">Tax optimization</div></article>
+      <article class="card"><div class="num-badge">84</div><div class="title">Will and estate basics</div></article>
+      <article class="card"><div class="num-badge">85</div><div class="title">Insurance review</div></article>
+      <article class="card"><div class="num-badge">86</div><div class="title">Quarterly declutter</div></article>
+      <article class="card"><div class="num-badge">87</div><div class="title">Capsule wardrobe</div></article>
+      <article class="card"><div class="num-badge">88</div><div class="title">Annual goal review with partner</div></article>
+      <article class="card"><div class="num-badge">89</div><div class="title">Daily small kindness</div></article>
+      <article class="card"><div class="num-badge">90</div><div class="title">Tell the people you love that you love them</div></article>
+      <article class="card"><div class="num-badge">91</div><div class="title">Pet care (if applicable)</div></article>
+      <article class="card"><div class="num-badge">92</div><div class="title">Grow something</div></article>
+      <article class="card"><div class="num-badge">93</div><div class="title">Listen to music with intent</div></article>
+      <article class="card"><div class="num-badge">94</div><div class="title">Make music, badly is fine</div></article>
+      <article class="card"><div class="num-badge">95</div><div class="title">Annual travel for perspective</div></article>
+      <article class="card"><div class="num-badge">96</div><div class="title">Cook with others</div></article>
+      <article class="card"><div class="num-badge">97</div><div class="title">Volunteer monthly</div></article>
+      <article class="card"><div class="num-badge">98</div><div class="title">Donate a fixed percent</div></article>
+      <article class="card"><div class="num-badge">99</div><div class="title">Hand-written letters</div></article>
+      <article class="card"><div class="num-badge">100</div><div class="title">Read aloud</div></article>
+    </div>
+  </section>
+
+  <!-- NCER ============================================== -->
+  <section class="tier tier-NCER">
+    <div class="tier-banner">
+      <div class="tier-letter">N</div>
+      <div class="tier-meta">
+        <span class="count">25 Items · The Other Ledger</span>
+        <span class="name">Habits that pay you back in reverse</span>
+      </div>
+    </div>
+    <div class="squiggle-divider"></div>
+
+    <div class="ncer-intro">
+      <p><strong>NCER.</strong> Negatively Compounding Energy Return. The cost is paid daily and stays small. The damage compounds quietly. Then a decade later it arrives all at once. The 100 above are the things to stack. These 25 are the things to actively cut.</p>
+    </div>
+
+    <div class="ncer-sublabel">NCER S · The 10 Worst Offenders</div>
+    <div class="grid grid-NCER-S">
+      <article class="card ncer-card"><div class="num-badge">N1</div><div class="title">Chronic sleep deprivation</div><div class="blurb">Underwrites the decay of everything else. Brain, body, mood, judgement.</div></article>
+      <article class="card ncer-card"><div class="num-badge">N2</div><div class="title">Toxic long-term relationship</div><div class="blurb">The single largest negative compounder available. Decades drain through it.</div></article>
+      <article class="card ncer-card"><div class="num-badge">N3</div><div class="title">Unmanaged chronic stress</div><div class="blurb">Hormones, sleep, brain, body, all bleed at the same time.</div></article>
+      <article class="card ncer-card"><div class="num-badge">N4</div><div class="title">Sedentary as default</div><div class="blurb">The modern killer. Compounds quietly into disease.</div></article>
+      <article class="card ncer-card"><div class="num-badge">N5</div><div class="title">Daily doomscrolling</div><div class="blurb">Attention, mood, time, all leaking through the same hole.</div></article>
+      <article class="card ncer-card"><div class="num-badge">N6</div><div class="title">Heavy regular alcohol</div><div class="blurb">Sleep, brain, gut, mood, relationships. All taxed daily.</div></article>
+      <article class="card ncer-card"><div class="num-badge">N7</div><div class="title">Smoking or vaping</div><div class="blurb">Body and money, every day, for life. No upside.</div></article>
+      <article class="card ncer-card"><div class="num-badge">N8</div><div class="title">High-interest revolving debt</div><div class="blurb">Capital compounding, running in reverse.</div></article>
+      <article class="card ncer-card"><div class="num-badge">N9</div><div class="title">Chronic negative self-talk</div><div class="blurb">The internal narrator becomes destiny. Watch yours.</div></article>
+      <article class="card ncer-card"><div class="num-badge">N10</div><div class="title">Permanently avoiding hard conversations</div><div class="blurb">Rot in slow motion. The conversation gets harder the longer you wait.</div></article>
+    </div>
+
+    <div class="ncer-sublabel">NCER A · 15 Strong Decompounders</div>
+    <div class="grid grid-NCER-A">
+      <article class="card ncer-card"><div class="num-badge">N11</div><div class="title">Ultra-processed food as default</div></article>
+      <article class="card ncer-card"><div class="num-badge">N12</div><div class="title">Compulsive porn use</div></article>
+      <article class="card ncer-card"><div class="num-badge">N13</div><div class="title">Gambling or speculative betting</div></article>
+      <article class="card ncer-card"><div class="num-badge">N14</div><div class="title">Hate-watching social media</div></article>
+      <article class="card ncer-card"><div class="num-badge">N15</div><div class="title">Working to impress people you don't like</div></article>
+      <article class="card ncer-card"><div class="num-badge">N16</div><div class="title">Saying yes to every commitment</div></article>
+      <article class="card ncer-card"><div class="num-badge">N17</div><div class="title">Holding grudges</div></article>
+      <article class="card ncer-card"><div class="num-badge">N18</div><div class="title">Living beyond your means</div></article>
+      <article class="card ncer-card"><div class="num-badge">N19</div><div class="title">Letting friendships die from neglect</div></article>
+      <article class="card ncer-card"><div class="num-badge">N20</div><div class="title">Skipping medical checkups</div></article>
+      <article class="card ncer-card"><div class="num-badge">N21</div><div class="title">Chronic complaining as identity</div></article>
+      <article class="card ncer-card"><div class="num-badge">N22</div><div class="title">Comparing yourself to curated highlights</div></article>
+      <article class="card ncer-card"><div class="num-badge">N23</div><div class="title">Habitual all-nighters</div></article>
+      <article class="card ncer-card"><div class="num-badge">N24</div><div class="title">Refusing to ask for help</div></article>
+      <article class="card ncer-card"><div class="num-badge">N25</div><div class="title">Optimizing for a role you don't want</div></article>
+    </div>
+  </section>
+
+</section>
+
+<!-- 20s ====================================================== -->
+<section class="view twenties" id="twenties" role="tabpanel">
+  <div class="decade-hero">
+    <div class="decade-badge">20s</div>
+    <div>
+      <h2 class="decade-headline">The Foundation Decade.</h2>
+      <p class="decade-prose">Time is the cheap input here. Habits started now run the longest tail. The big mistake is treating health, friends, and money like they refill on their own. They do not.</p>
+    </div>
+  </div>
+
+  <span class="section-tag">Heaviest leverage anchors</span>
+  <div class="anchors">
+    <div class="anchor"><div class="anchor-tag">Anchor 01</div><div class="anchor-title">Craft skill investment</div><div class="anchor-note">Pick one domain, get serious. Career capital compounds longest from here.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 02</div><div class="anchor-title">Partner discernment</div><div class="anchor-note">Learn to read character. The choice you make now shapes the next five decades.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 03</div><div class="anchor-title">Savings rate, started early</div><div class="anchor-note">A small percent saved now beats a large percent saved later. Time does the work.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 04</div><div class="anchor-title">Baseline sleep and movement</div><div class="anchor-note">Wire the habits before responsibilities pile up. Cheap now, expensive after.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 05</div><div class="anchor-title">Read more than ever</div><div class="anchor-note">Borrow minds while attention is cheap. Volume builds taste.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 06</div><div class="anchor-title">Try widely on purpose</div><div class="anchor-note">Low-stakes shots. Find the thread, before you pull it.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 07</div><div class="anchor-title">Build a wide friend group</div><div class="anchor-note">These people become the spine of the next forty years.</div></div>
+  </div>
+
+  <div class="risks">
+    <div class="risks-head">NCER risks for this decade</div>
+    <ul class="risks-list">
+      <li>Treating health like it regenerates indefinitely</li>
+      <li>Sleep slides for work or social life</li>
+      <li>Debt accumulation as a default mode</li>
+      <li>Lifestyle creep tracking income</li>
+      <li>Choosing partners on chemistry alone</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 30s ====================================================== -->
+<section class="view thirties" id="thirties" role="tabpanel">
+  <div class="decade-hero">
+    <div class="decade-badge">30s</div>
+    <div>
+      <h2 class="decade-headline">The Consolidation Decade.</h2>
+      <p class="decade-prose">Compounding starts to show. The body sends its first signal that recovery is no longer free. Pick what to deepen and what to set down. Most 30-something energy crises come from refusing to drop the things that already paid out.</p>
+    </div>
+  </div>
+
+  <span class="section-tag">Heaviest leverage anchors</span>
+  <div class="anchors">
+    <div class="anchor"><div class="anchor-tag">Anchor 01</div><div class="anchor-title">Career compounding</div><div class="anchor-note">Skill, reputation, network all start paying. Protect the runway.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 02</div><div class="anchor-title">Partnership deepening</div><div class="anchor-note">Dating becomes life-running. Maintenance is daily, not occasional.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 03</div><div class="anchor-title">Structured strength training</div><div class="anchor-note">Muscle loss starts now. Strength training stops being optional.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 04</div><div class="anchor-title">Sleep quality</div><div class="anchor-note">The body stops forgiving. Quality matters more than quantity.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 05</div><div class="anchor-title">Parent time</div><div class="anchor-note">The window is finite and closing faster than it feels.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 06</div><div class="anchor-title">Purpose clarity</div><div class="anchor-note">Stop exploring widely. Commit to the thread that proved itself.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 07</div><div class="anchor-title">Financial discipline</div><div class="anchor-note">Income rises, temptation rises. Lock savings as a percent, not a leftover.</div></div>
+  </div>
+
+  <div class="risks">
+    <div class="risks-head">NCER risks for this decade</div>
+    <ul class="risks-list">
+      <li>Friendships erode under work and family load</li>
+      <li>Early signs of decline get ignored</li>
+      <li>Over-indexing on work at the cost of partnership</li>
+      <li>Sleep treated as negotiable</li>
+      <li>Stalling on purpose while waiting for certainty</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 40s ====================================================== -->
+<section class="view forties" id="forties" role="tabpanel">
+  <div class="decade-hero">
+    <div class="decade-badge">40s</div>
+    <div>
+      <h2 class="decade-headline">The Mastery and Maintenance Decade.</h2>
+      <p class="decade-prose">Career often peaks. Body asks for active maintenance, not just willingness. Parents need care. Partnership needs rekindling. Drift in this decade gets expensive fast.</p>
+    </div>
+  </div>
+
+  <span class="section-tag">Heaviest leverage anchors</span>
+  <div class="anchors">
+    <div class="anchor"><div class="anchor-tag">Anchor 01</div><div class="anchor-title">Strength training</div><div class="anchor-note">Now critical. Bone density, muscle, balance, hormones all hinge on it.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 02</div><div class="anchor-title">Sleep</div><div class="anchor-note">Hormonal shifts hit sleep first. Protect it like a high-cost asset.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 03</div><div class="anchor-title">Stress management</div><div class="anchor-note">The body keeps score now. Recovery becomes non-negotiable.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 04</div><div class="anchor-title">Marriage maintenance</div><div class="anchor-note">Routine is the enemy. Rekindle on purpose. Repair fast.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 05</div><div class="anchor-title">Parent care</div><div class="anchor-note">Logistics increase. Be present for the harder conversations.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 06</div><div class="anchor-title">Financial planning</div><div class="anchor-note">Retirement, college, the unexpected. The math gets sharper now.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 07</div><div class="anchor-title">Recommit to purpose</div><div class="anchor-note">Old goals may have served. Pick new ones on purpose.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 08</div><div class="anchor-title">Mentor others</div><div class="anchor-note">Generativity feeds energy back. Teach what you know.</div></div>
+  </div>
+
+  <div class="risks">
+    <div class="risks-head">NCER risks for this decade</div>
+    <ul class="risks-list">
+      <li>Midlife identity crisis driving rash moves</li>
+      <li>Body neglect masked by busyness</li>
+      <li>Financial decisions made under emotional weight</li>
+      <li>Coasting on past career capital</li>
+      <li>Marriage on auto-pilot</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 50s ====================================================== -->
+<section class="view fifties" id="fifties" role="tabpanel">
+  <div class="decade-hero">
+    <div class="decade-badge">50s</div>
+    <div>
+      <h2 class="decade-headline">The Transition Decade.</h2>
+      <p class="decade-prose">Body composition asks for aggressive management. Children leave. Career enters a new phase. Build the second half on purpose with everything earned in the first.</p>
+    </div>
+  </div>
+
+  <span class="section-tag">Heaviest leverage anchors</span>
+  <div class="anchors">
+    <div class="anchor"><div class="anchor-tag">Anchor 01</div><div class="anchor-title">Strength plus balance</div><div class="anchor-note">Falls become real risks within a decade. Train balance now.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 02</div><div class="anchor-title">Brain-engaging hobbies</div><div class="anchor-note">New skills keep the brain plastic. Pick them up on purpose.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 03</div><div class="anchor-title">Social network maintenance</div><div class="anchor-note">The web thins by default. Tend it actively. Initiate, host, call.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 04</div><div class="anchor-title">Hormone management</div><div class="anchor-note">Get checked, get informed. Mood, sleep, body all depend on it.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 05</div><div class="anchor-title">Retirement runway</div><div class="anchor-note">Run the numbers. Make trade-offs explicit. Stop guessing.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 06</div><div class="anchor-title">Mentor the next generation</div><div class="anchor-note">Pass it on. Specifically, deliberately, with time.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 07</div><div class="anchor-title">Process midlife meaning</div><div class="anchor-note">Therapy, journaling, retreats. The interior work matters now.</div></div>
+  </div>
+
+  <div class="risks">
+    <div class="risks-head">NCER risks for this decade</div>
+    <ul class="risks-list">
+      <li>Isolation after children leave or career peaks pass</li>
+      <li>Sedentary drift hidden by routine</li>
+      <li>Identity loss when an old role ends</li>
+      <li>Skipping health screenings</li>
+      <li>Coasting into a thin financial runway</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 60s ====================================================== -->
+<section class="view sixties" id="sixties" role="tabpanel">
+  <div class="decade-hero">
+    <div class="decade-badge">60s</div>
+    <div>
+      <h2 class="decade-headline">The Longevity Decade.</h2>
+      <p class="decade-prose">Compounding now favors maintenance. Mobility, social engagement, brain stimulation, and post-career purpose are the highest-CER moves. Keep them and you buy yourself more decade than most people expect.</p>
+    </div>
+  </div>
+
+  <span class="section-tag">Heaviest leverage anchors</span>
+  <div class="anchors">
+    <div class="anchor"><div class="anchor-tag">Anchor 01</div><div class="anchor-title">Balance and mobility</div><div class="anchor-note">Fall prevention is the single highest-leverage practice. One bad fall erases a decade.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 02</div><div class="anchor-title">Social engagement</div><div class="anchor-note">Isolation raises mortality risk meaningfully. Stay in the room.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 03</div><div class="anchor-title">Brain stimulation</div><div class="anchor-note">Read, study, learn new things. Cognitive reserve is real.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 04</div><div class="anchor-title">Post-career purpose</div><div class="anchor-note">Volunteer, advise, write, teach. Work changes form but stays meaningful.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 05</div><div class="anchor-title">Regular medical screening</div><div class="anchor-note">Early detection turns a problem into a manageable thing.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 06</div><div class="anchor-title">Intergenerational connection</div><div class="anchor-note">Grandchildren, mentees, neighbors. Young company keeps the spirit young.</div></div>
+    <div class="anchor"><div class="anchor-tag">Anchor 07</div><div class="anchor-title">Legacy work</div><div class="anchor-note">Write the book. Tell the stories. Make what only you can make.</div></div>
+  </div>
+
+  <div class="risks">
+    <div class="risks-head">NCER risks for this decade</div>
+    <ul class="risks-list">
+      <li>Sudden decline when maintenance lapses</li>
+      <li>Social withdrawal after retirement</li>
+      <li>Loss of structure once work ends</li>
+      <li>Postponing the legacy work indefinitely</li>
+      <li>Skipping medical screenings</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span class="stamp outline">The CER Sticker Book</span>
+  <span>100 Habits · Six Lifetimes · One Cheap Field Guide</span>
+</footer>
+
+<script>
+  (function () {
+    const tabs = document.querySelectorAll('.tab');
+    const views = document.querySelectorAll('.view');
+    const searchWrap = document.getElementById('searchWrap');
+    const searchBox = document.getElementById('searchBox');
+    const shuffleBtn = document.getElementById('shuffleBtn');
+
+    function setView(name) {
+      tabs.forEach(t => {
+        const on = t.dataset.view === name;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      views.forEach(v => v.classList.toggle('active', v.id === name));
+      searchWrap.classList.toggle('hidden', name !== 'lifetime');
+      if (name !== 'lifetime') {
+        searchBox.value = '';
+        runFilter('');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    tabs.forEach(t => t.addEventListener('click', () => setView(t.dataset.view)));
+
+    function runFilter(q) {
+      const query = q.trim().toLowerCase();
+      document.querySelectorAll('#lifetime .card').forEach(card => {
+        const text = (card.querySelector('.title')?.textContent || '') + ' ' + (card.querySelector('.blurb')?.textContent || '');
+        const match = !query || text.toLowerCase().includes(query);
+        card.classList.toggle('hidden', !match);
+      });
+    }
+
+    searchBox.addEventListener('input', e => runFilter(e.target.value));
+
+    // Shuffle: pick a random card from currently active view, scroll to it, flash it
+    shuffleBtn.addEventListener('click', () => {
+      const active = document.querySelector('.view.active');
+      if (!active) return;
+      const cards = active.querySelectorAll('.card:not(.hidden), .anchor');
+      if (!cards.length) return;
+      const pick = cards[Math.floor(Math.random() * cards.length)];
+      // remove any prior flash
+      document.querySelectorAll('.flash').forEach(c => c.classList.remove('flash'));
+      pick.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => pick.classList.add('flash'), 280);
+      setTimeout(() => pick.classList.remove('flash'), 1900);
+    });
+
+    // Alt + arrow keys to flip through tabs
+    document.addEventListener('keydown', e => {
+      if (!e.altKey) return;
+      const order = ['lifetime', 'twenties', 'thirties', 'forties', 'fifties', 'sixties'];
+      const current = order.findIndex(id => document.getElementById(id).classList.contains('active'));
+      if (e.key === 'ArrowRight') { e.preventDefault(); setView(order[Math.min(order.length - 1, current + 1)]); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); setView(order[Math.max(0, current - 1)]); }
+      if (e.key === 's' || e.key === 'S') { e.preventDefault(); shuffleBtn.click(); }
+    });
+  })();
+</script>
+
+</body>
+</html>
