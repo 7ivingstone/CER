@@ -761,6 +761,159 @@
     border: 2px solid var(--paper);
   }
 
+  /* MODAL ----------------------------------------------------- */
+  .card { cursor: pointer; }
+  .card .more-hint {
+    position: absolute;
+    bottom: 6px;
+    right: 12px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0;
+    transition: opacity 180ms;
+    pointer-events: none;
+  }
+  .card:hover .more-hint { opacity: 0.7; }
+  .ncer-card .more-hint { color: var(--yellow); }
+  .ncer-card:hover .more-hint { opacity: 0.95; }
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(24,24,26,0.78);
+    backdrop-filter: blur(3px);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 220ms;
+  }
+  .modal-overlay.open { display: flex; opacity: 1; }
+
+  .modal-box {
+    background: var(--paper);
+    border: 4px solid var(--ink);
+    box-shadow: 14px 14px 0 var(--hot-pink);
+    max-width: 680px;
+    width: 100%;
+    max-height: 88vh;
+    overflow-y: auto;
+    padding: 38px 38px 32px;
+    position: relative;
+    transform: rotate(-0.6deg) scale(0.94);
+    transition: transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .modal-overlay.open .modal-box { transform: rotate(-0.6deg) scale(1); }
+
+  .modal-box.ncer {
+    background: #1a0e10;
+    box-shadow: 14px 14px 0 var(--yellow);
+    color: var(--paper);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: -22px;
+    right: -22px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--coral);
+    border: 3px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    cursor: pointer;
+    font-family: var(--display);
+    font-size: 24px;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 160ms;
+  }
+  .modal-close:hover { transform: rotate(90deg) scale(1.1); }
+  .modal-box.ncer .modal-close { background: var(--yellow); }
+
+  .modal-num {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5px 12px;
+    margin-bottom: 16px;
+    transform: rotate(-1.5deg);
+    text-transform: uppercase;
+  }
+  .modal-box.ncer .modal-num { background: var(--hot-pink); color: var(--paper); }
+
+  .modal-title {
+    font-family: var(--sub);
+    font-size: clamp(26px, 3.8vw, 38px);
+    line-height: 1.08;
+    margin-bottom: 24px;
+    color: var(--ink);
+  }
+  .modal-box.ncer .modal-title { color: var(--paper); }
+
+  .modal-section {
+    margin-bottom: 16px;
+    padding: 14px 18px 16px;
+    background: var(--paper-2);
+    border: 2px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    position: relative;
+  }
+  .modal-box.ncer .modal-section {
+    background: rgba(255,241,198,0.06);
+    border-color: var(--paper);
+    box-shadow: 4px 4px 0 var(--hot-pink);
+  }
+
+  .modal-section .label {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 10px;
+    padding: 3px 9px;
+    background: var(--coral);
+    border: 1.5px solid var(--ink);
+    transform: rotate(-1.5deg);
+  }
+  .modal-box.ncer .modal-section .label {
+    color: var(--ink);
+    background: var(--yellow);
+    border-color: var(--paper);
+  }
+
+  .modal-section .body {
+    font-family: var(--sans);
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .modal-box.ncer .modal-section .body { color: var(--paper); }
+
+  .modal-section .src {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+    font-style: italic;
+  }
+  .modal-box.ncer .modal-section .src { color: rgba(255,241,198,0.55); }
+
   /* RESPONSIVE ------------------------------------------------ */
   @media (max-width: 720px) {
     .top-bar { font-size: 10px; }
@@ -1208,6 +1361,26 @@
   <span>100 Habits · Six Lifetimes · One Cheap Field Guide</span>
 </footer>
 
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose" aria-label="close">×</button>
+    <div class="modal-num" id="modalNum"></div>
+    <h3 class="modal-title" id="modalTitle"></h3>
+    <div class="modal-section">
+      <span class="label">Stat</span>
+      <div class="body" id="modalStat"></div>
+    </div>
+    <div class="modal-section">
+      <span class="label">Story</span>
+      <div class="body" id="modalStory"></div>
+    </div>
+    <div class="modal-section">
+      <span class="label">What it looks like</span>
+      <div class="body" id="modalExample"></div>
+    </div>
+  </div>
+</div>
+
 <script>
   (function () {
     const tabs = document.querySelectorAll('.tab');
@@ -1216,6 +1389,511 @@
     const searchBox = document.getElementById('searchBox');
     const shuffleBtn = document.getElementById('shuffleBtn');
 
+    // ========= CARD DATASET (125 entries) =========
+    const cardData = {
+      '01': { t: 'Sleep 7 to 9 hours, every night',
+        s: 'Adults sleeping under 7 hours show ~13% higher all-cause mortality risk over follow-up. ~35% of US adults sleep less than 7 hours nightly. <span class="src">Cappuccio et al., Sleep, 2010 meta-analysis. CDC sleep data.</span>',
+        y: 'Sleep researcher Matthew Walker (UC Berkeley) made the public case in Why We Sleep (2017). Roger Federer reportedly slept 11 to 12 hours nightly during peak playing years. LeBron James schedules naps to hit 12 hours daily.',
+        e: 'Anchor 23:00 to 07:00 every night, weekends included. Cool dark room (16 to 19°C). Phone outside bedroom. No caffeine after 14:00.' },
+      '02': { t: 'Move daily, aerobic plus strength',
+        s: 'Physical inactivity attributable to ~9% of premature deaths globally, similar magnitude to smoking. Top-quartile VO2 max cuts all-cause mortality risk by 80% vs bottom quartile. <span class="src">Lee et al., Lancet, 2012. Mandsager et al., JAMA Network Open, 2018.</span>',
+        y: 'Peter Attia, longevity physician (Outlive, 2023), calls VO2 max the strongest single mortality predictor. He trains his patients toward elite VO2 max regardless of age.',
+        e: '30 to 45 min zone 2 cardio, 3 to 4x per week. 2 to 3 strength sessions covering legs, push, pull, hinge, carry.' },
+      '03': { t: 'Whole food with a protein floor',
+        s: 'Adults over 40 likely need 1.2 to 1.6 g/kg protein daily to preserve muscle, above the older 0.8 g/kg RDA. ~58% of US calories come from ultra-processed foods. <span class="src">Phillips et al., McMaster U. Martínez Steele et al., BMJ Open, 2016.</span>',
+        y: 'Don Layman (U Illinois) popularized the leucine threshold (~2.5 to 3g per meal triggers muscle protein synthesis), shifting recommendations from daily total to per-meal distribution.',
+        e: '30 to 40g protein per meal, three times daily. Whole foods first. Chicken, eggs, Greek yogurt, lentils, fish, beans. Bulk cook on Sundays.' },
+      '04': { t: 'Long-term partnership with the right person',
+        s: 'Relationship quality at 50 predicts physical health at 80 better than cholesterol levels do. <span class="src">Harvard Study of Adult Development, ongoing since 1938. Robert Waldinger, current director.</span>',
+        y: 'Waldinger\'s 2015 TED talk on the study has 50M+ views. The data tracked 268 Harvard sophomores plus 456 Boston inner-city men across their entire lives.',
+        e: 'Weekly date with no agenda. Annual partnership-only retreat. Hard conversations resolved within 48 hours, not 48 days.' },
+      '05': { t: 'Journal or sit, daily',
+        s: 'Expressive writing for 15 to 20 min daily improves immune markers, mood, and academic performance across 30+ years of replicated trials. <span class="src">James Pennebaker, UT Austin, foundational work from 1986 onward.</span>',
+        y: 'Marcus Aurelius wrote Meditations as private journal entries to himself, never intending publication. Two millennia later it remains a best-selling Stoic text.',
+        e: '5 to 10 min in the morning or evening. Three prompts. What\'s true now. What I\'m avoiding. What I\'m grateful for.' },
+      '06': { t: 'Save a fixed percent of income',
+        s: '$500/month invested at 7% real return starting at 25 reaches ~$1.2M by 65. Starting at 35 yields ~$575k. The 10-year delay halves the result. <span class="src">Standard compound interest math.</span>',
+        y: 'Warren Buffett bought his first stock at 11. He has lived in the same Omaha house since 1958. His snowball metaphor. Small starts, long slope, time does the work.',
+        e: 'Auto-split paycheck. 20% to investments before checking. Index funds (VOO, VTI). Raise the rate 1% every year.' },
+      '07': { t: 'Get good at one craft',
+        s: 'Mastery in chess, music, and sport correlates with focused, feedback-driven practice, not just time spent. The "10,000 hour rule" popularized this finding (with caveats). <span class="src">K. Anders Ericsson, Florida State, deliberate practice research.</span>',
+        y: 'Cellist Pablo Casals practiced 4 to 5 hours daily into his 90s. Asked why at 93, he said "I\'m beginning to notice some improvement."',
+        e: 'Pick one domain. Schedule 1 to 2 hour daily focused sessions. Get coached. Measure progress. Stay in it five years before judging.' },
+      '08': { t: 'Do work that pays back the worker',
+        s: 'Having a strong sense of purpose correlates with ~15% lower mortality risk across age groups, even controlling for health behaviors. <span class="src">Hill and Turiano, Psychological Science, 2014.</span>',
+        y: 'Viktor Frankl survived four Nazi concentration camps and wrote in Man\'s Search for Meaning (1946) that those with a "why" outlasted those without one, even under identical conditions.',
+        e: 'One question to ask weekly. Does this hour serve something I actually care about? If no for six months, change something.' },
+      '09': { t: 'Read daily, across topics',
+        s: 'Book readers had ~20% lower mortality risk than non-readers over 12 years of follow-up, controlling for education. <span class="src">Bavishi et al., Yale, Social Science & Medicine, 2016. 3,635 adults over 50.</span>',
+        y: 'Charlie Munger called himself a "book with legs." Warren Buffett spends an estimated 80% of his working day reading. Both compounded over decades.',
+        e: '30 to 60 min daily. Mix history, science, biography, fiction. Keep a notes file. Re-read the great ones.' },
+      '10': { t: 'Give to others, regularly',
+        s: 'Acts of generosity reliably raise the giver\'s wellbeing, often more than the receiver\'s, persisting for weeks. <span class="src">Sonja Lyubomirsky, UC Riverside, kindness intervention studies, 2005 onward.</span>',
+        y: 'Adam Grant\'s Give and Take (2013) analyzed business and academic outcomes. Long-term top performers are disproportionately "givers," despite short-term costs.',
+        e: 'One regular giving practice. Monthly volunteer shift. 5% of income donated. Mentoring a younger colleague. Built in, not occasional.' },
+      '11': { t: 'Deep work blocks daily',
+        s: 'Elite performers cap at ~4 hours of pure deliberate practice per day. <span class="src">K. Anders Ericsson research. Cal Newport, Deep Work, 2016, extended to knowledge workers.</span>',
+        y: 'Charles Darwin wrote On the Origin of Species in roughly 4 focused hours per day, walking his sandwalk for thinking breaks. He never worked frantically, only consistently.',
+        e: '90 min block in the morning. No phone, no Slack, one project. Repeat once after lunch. Done by 14:00.' },
+      '12': { t: 'Morning sun and outside time',
+        s: '5 to 10 min of morning sunlight within 30 min of waking shifts circadian rhythm, improves sleep onset and daytime energy. <span class="src">Andrew Huberman, Stanford neuroscience, summarizing circadian research.</span>',
+        y: 'Light therapy for seasonal affective disorder (pioneered by Norman Rosenthal at NIMH in the 1980s) proved high-intensity light directly affects mood and biology.',
+        e: '5 to 15 min outside within 30 min of waking. No sunglasses for the first 5 min. Coffee on the porch.' },
+      '13': { t: 'Make something on a regular cadence',
+        s: 'Creative output emerges from regular practice in a creative community, not from lone genius bursts. <span class="src">Brian Eno\'s "scenius" concept. Volume hypothesis supported by Simonton\'s creativity research.</span>',
+        y: 'Stephen King writes 2,000 words a day, every day, including his birthday and Christmas. The consistency, not the inspiration, produced 60+ novels.',
+        e: 'Pick one medium. 30 to 60 min daily. Ship publicly at a set cadence. Weekly post, monthly song, quarterly essay.' },
+      '14': { t: 'Spiritual or contemplative practice',
+        s: '8 weeks of mindfulness meditation produced measurable gray matter density changes in the hippocampus and amygdala. <span class="src">Sara Lazar et al., Harvard, NeuroReport, 2005. Replicated since.</span>',
+        y: 'Trappist monk Thomas Merton lived in silence at Gethsemani Abbey for 27 years, writing books that reshaped 20th-century contemplative practice.',
+        e: '10 to 20 min daily. Sit, breathe, return when distracted. Apps. Insight Timer, Waking Up. Or a religious practice consistent with your tradition.' },
+      '15': { t: 'Keep old friendships alive',
+        s: 'Quality and consistency of contact, not number of friends, predicts health and happiness over decades. <span class="src">Harvard Study of Adult Development.</span>',
+        y: 'Studs Terkel, Pulitzer-winning oral historian, kept friendships from his Chicago youth until his death at 96. He called the consistency "the only insurance worth paying for."',
+        e: 'Voice notes weekly. Calls monthly. In-person yearly minimum. Birthdays remembered. Funerals shown up for.' },
+      '16': { t: 'Build a couple of new deep friends',
+        s: '~200 hours of shared time converts acquaintances into close friends, with frequency mattering as much as total hours. <span class="src">Jeffrey Hall, University of Kansas, J Social and Personal Relationships, 2018.</span>',
+        y: 'Daniel Kahneman and Amos Tversky met in their 30s. Their friendship and partnership reshaped psychology and economics and won a Nobel.',
+        e: 'Find one or two people who light you up. Invest 200+ hours over a year. Shared challenges accelerate the curve.' },
+      '17': { t: 'Walk 7 to 10k steps a day',
+        s: 'Step counts of 4,400/day cut mortality risk meaningfully vs 2,700, with benefit plateauing around 7,500. <span class="src">Lee et al., JAMA Internal Medicine, 2019.</span>',
+        y: 'Friedrich Nietzsche wrote "All truly great thoughts are conceived by walking." Steve Jobs famously held walking meetings on Apple\'s campus.',
+        e: '30 to 60 min walk daily. Hands free, phone away, head up. Better problems get solved this way than at desks.' },
+      '18': { t: 'Strength train three times a week',
+        s: 'Untrained adults lose 0.5 to 1% of muscle mass per year after age 30. Resistance training 2 to 3x/week reverses or slows the loss. <span class="src">Stuart Phillips et al., McMaster U, sarcopenia research.</span>',
+        y: 'Mark Rippetoe (Starting Strength) and Stuart McGill (U Waterloo back research) brought heavy compound lifting to general fitness audiences in the 2000s.',
+        e: '3x/week. Squat, hinge, push, pull, carry. Progressive overload. Form first. Track weights in a notebook.' },
+      '19': { t: 'Cook your own food',
+        s: 'Adults who cook at home most often eat fewer calories, less sugar, and less fat than frequent eat-out adults. <span class="src">Wolfson and Bleich, Public Health Nutrition, 2015.</span>',
+        y: 'Samin Nosrat (Salt Fat Acid Heat, 2017) built a career teaching home cooks fundamentals over recipes. The principle, not the prescription, is what scales.',
+        e: '5 to 6 home meals per week minimum. Bulk cook on Sunday. Air fryer plus sheet pan plus rice cooker. Repeat 6 to 8 dishes you actually like.' },
+      '20': { t: 'Drink water like you mean it',
+        s: 'Mild dehydration (1 to 2% body water loss) impairs attention, working memory, and mood. <span class="src">Ganio et al., British Journal of Nutrition, 2011.</span>',
+        y: 'NASA studies on astronaut cognitive performance treat hydration as critical as sleep for output in high-stakes environments.',
+        e: 'Bottle on the desk. Glass with every meal. Pee should be pale yellow. About 2 to 3L total daily.' },
+      '21': { t: 'Breathwork',
+        s: 'Slow nasal breathing at 5 to 6 breaths/min shifts the autonomic nervous system toward parasympathetic dominance within minutes, reducing cortisol. <span class="src">Brown and Gerbarg, Columbia, multiple papers from 2005.</span>',
+        y: 'Patrick McKeown (Oxygen Advantage) and Wim Hof popularized breath training in the 2010s. The Buteyko method has been used clinically for asthma since the 1950s.',
+        e: '5 min daily. Box breathing (4-4-4-4) or extended exhale (4 in, 8 out). Use before sleep, during stress, between meetings.' },
+      '22': { t: 'Annual physical and blood panel',
+        s: 'Most preventable cardiovascular events show warning signs years in advance via lab markers like ApoB, Lp(a), and fasting insulin. <span class="src">Peter Attia, Outlive, 2023. Eric Topol, Scripps cardiology.</span>',
+        y: 'Attia and Topol lead a longevity-medicine movement arguing mainstream medicine catches slow-developing diseases too late, after damage accrues for years.',
+        e: 'Annual draw. Track ApoB, Lp(a), HbA1c, fasting insulin, lipid panel, hsCRP, vitamin D, ferritin. Get trend explanations, not just numbers.' },
+      '23': { t: 'Brush and floss, every day',
+        s: 'Adults who floss daily show lower cardiovascular disease incidence in multiple cohorts. Oral bacteria translocate via the bloodstream to arterial plaques. <span class="src">Beck et al. and follow-up studies on oral-systemic links.</span>',
+        y: 'Weston Price, dentist in the 1930s, traveled the world documenting traditional populations with intact teeth and concluded modern diet was the primary driver of dental disease.',
+        e: '2 min brushing 2x/day. Floss every night. Dental cleaning 2x/year. Electric toothbrush, fluoride or hydroxyapatite paste.' },
+      '24': { t: 'Sun protection',
+        s: 'About 80 to 90% of visible facial aging is attributable to UV exposure. Daily SPF use reduces melanoma incidence in clinical trials. <span class="src">Flament et al., Clinical Cosmetic and Investigational Dermatology, 2013.</span>',
+        y: 'Australia\'s Slip, Slop, Slap campaign (1981 onward) is credited with measurable drops in melanoma incidence in younger Australian cohorts.',
+        e: 'SPF 30+ daily on face. Hat outdoors. Shade between 11:00 and 15:00. Reapply if outdoors for hours.' },
+      '25': { t: 'Read nonfiction',
+        s: 'Book-length information density is roughly an order of magnitude above short-form content. A focused 6-hour book read can encode decades of an expert\'s thinking. <span class="src">General observation from information theory; supported by reading comprehension research.</span>',
+        y: 'Naval Ravikant talks about reading the foundational books in a domain rather than tracking news. Charlie Munger built a "latticework of mental models" from wide cross-domain reading.',
+        e: 'One book per topic at a time. Take notes. Move on. 12 to 25 books a year covers most adult learning needs.' },
+      '26': { t: 'Read fiction',
+        s: 'Readers of literary fiction show measurable improvements on theory of mind and empathy tasks vs nonfiction or no reading. <span class="src">Kidd and Castano, Science, 2013. Mar et al., York University, replicated work.</span>',
+        y: 'Barack Obama has cited Marilynne Robinson and Toni Morrison as central to how he learned to think about complex moral situations as president.',
+        e: '1 to 2 novels a month. Mix literary, classic, and genre. Read before sleep instead of screens.' },
+      '27': { t: 'Write regularly',
+        s: 'Writing about thoughts and experiences forces precision and surfaces hidden assumptions. The discovery is in the doing. <span class="src">Paul Graham essays; Pennebaker expressive writing research.</span>',
+        y: 'Joan Didion. "I don\'t know what I think until I write it down." Paul Graham argues writing-and-thinking are essentially inseparable.',
+        e: '250 to 500 words daily. Public optional. Topics. What I learned today. What\'s bothering me. What\'s true now.' },
+      '28': { t: 'Teach or mentor someone',
+        s: 'The "protégé effect" or learning-by-teaching produces measurably higher retention than passive study, replicated since the 1980s. <span class="src">Bargh and Schul, Journal of Educational Psychology, 1980. Many replications.</span>',
+        y: 'Richard Feynman formalized the technique. If you cannot explain it to a beginner, you do not understand it. Now standard practice in physics education.',
+        e: 'Mentor someone in your domain. Teach a class. Write a public guide. The teacher learns more than the student.' },
+      '29': { t: 'Say no to misaligned commitments',
+        s: 'Decision fatigue degrades decision quality across a day. Too many commitments compound the problem across weeks. <span class="src">Baumeister, Vohs et al., ego depletion research, JPSP and follow-ups.</span>',
+        y: 'Warren Buffett. "The difference between successful people and very successful people is that very successful people say no to almost everything."',
+        e: 'Default to no on new commitments. The bar is "hell yes." Saying no early is easier than backing out late.' },
+      '30': { t: 'Volunteer or join a community',
+        s: 'Long-term volunteers (especially with altruistic motives) show lower depression rates and longer lifespans. <span class="src">Konrath et al., Health Psychology, 2012.</span>',
+        y: 'Robert Putnam\'s Bowling Alone (2000) traced 50 years of US civic decline and connected loss of community to measurable wellbeing decline.',
+        e: 'One regular volunteer commitment. Monthly minimum. Choose a cause you\'d care about even if no one noticed.' },
+      '31': { t: 'Monthly finance tracking',
+        s: 'Households who track expenses save 15 to 20% more than those who don\'t. <span class="src">Consumer Financial Protection Bureau survey data.</span>',
+        y: 'Ramit Sethi (I Will Teach You to Be Rich) built a career arguing the tracking habit matters more than the budget detail.',
+        e: '30 min on the first Saturday of each month. Net worth, spending categories, savings rate. Done.' },
+      '32': { t: 'Emergency fund discipline',
+        s: '37% of US adults cannot cover a $400 emergency without borrowing. <span class="src">Federal Reserve Survey of Household Economics and Decisionmaking, 2022.</span>',
+        y: 'Dave Ramsey\'s baby step framework, controversial in some details, anchors on a 1-month then 3-6 month emergency fund. Millions credit the structure with getting them out of debt.',
+        e: '3 to 6 months of essential expenses in a high-yield savings account. Auto-funded monthly. Don\'t touch unless emergency.' },
+      '33': { t: 'No lifestyle creep',
+        s: 'Happiness gains from spending fade fast (the hedonic treadmill). Maintained higher spending mostly raises baseline expectations. <span class="src">Brickman et al., 1971. Refined by Lyubomirsky and others.</span>',
+        y: 'Mr. Money Mustache (Peter Adeney) retired at 30 by living simply on a software salary, popularizing the FIRE movement online.',
+        e: 'Cap each major lifestyle item (rent, car, food) at a percent of income. When raises arrive, redirect to savings first.' },
+      '34': { t: 'Low-stakes hobbies and play',
+        s: 'Adults with playful hobbies show lower burnout, better mood regulation, and higher life satisfaction. Play is not optional for adult mental health. <span class="src">Brené Brown research on play and shame; Stuart Brown, National Institute for Play.</span>',
+        y: 'Roger Federer talked about golf, fishing, and music in his off-tennis life as central to his longevity in the sport. Play protects the work.',
+        e: 'One hobby with no upside expectation. Just joy. Schedule it weekly. Skill optional, enjoyment mandatory.' },
+      '35': { t: 'Weekly time in nature',
+        s: '50 min in nature improved working memory and attention measurably vs city walking (attention restoration effect). <span class="src">Berman, Jonides, Kaplan, Psychological Science, 2008.</span>',
+        y: 'John Muir wrote in the 1890s that "the clearest way into the Universe is through a forest wilderness." Modern shinrin-yoku (Japanese forest bathing) formalized the practice in the 1980s.',
+        e: '1 to 2 hours in unbuilt nature weekly. Phone in pocket. Walk slowly. No headphones for the first 20 min.' },
+      '36': { t: 'Cold exposure',
+        s: 'Regular cold exposure increases brown fat activity and norepinephrine response, with metabolic and mood benefits. <span class="src">Søberg et al., Cell Reports Medicine, 2021.</span>',
+        y: 'Wim Hof popularized cold exposure with reproducible protocols. Cohort studies in Finland and Scandinavia (cold-dipping cultures) report mood benefits in habitual practitioners.',
+        e: '1 to 3 min cold shower or plunge, 2 to 3x/week. Build from cool to cold. Always exit warming, not shaking.' },
+      '37': { t: 'Sauna',
+        s: 'Sauna use 4 to 7x/week associated with ~50% lower cardiovascular mortality vs once weekly. <span class="src">Laukkanen et al., JAMA Internal Medicine, 2015. Finnish cohort, 2,315 men over 20 years.</span>',
+        y: 'Sauna is deeply cultural in Finland (3M saunas for 5.5M people). The longest-running cohort data on sauna behavior is Finnish.',
+        e: '15 to 30 min at 80 to 100°C, 2 to 4x/week. Hydrate before and after. End cool.' },
+      '38': { t: 'Mobility work',
+        s: 'Active flexibility (the ability to move through ranges) tracks more closely with longevity than passive flexibility. Loss accelerates from the 30s. <span class="src">Sport science literature; ACSM guidelines.</span>',
+        y: 'Kelly Starrett (MobilityWOD founder) brought mobility from physical therapy into general training, arguing daily 10-min mobility prevents most chronic pain.',
+        e: '10 min daily. Hips, thoracic spine, ankles, shoulders. Cossack squats, 90/90s, thoracic openers, ankle dorsiflexion.' },
+      '39': { t: 'Posture practice',
+        s: 'Persistent forward head posture loads the cervical spine 4 to 5x more than neutral. Chronic poor posture is linked to headaches, neck pain, and breathing restriction. <span class="src">Spine biomechanics literature.</span>',
+        y: 'Esther Gokhale (Gokhale Method) studied indigenous populations with near-zero rates of low back pain and built a postural intervention based on traditional carriage.',
+        e: 'Phone at eye level. Monitor at eye level. Stand check every hour (chin tucked, shoulders back). Strengthen rear delts and lower traps.' },
+      '40': { t: 'Cut ultra-processed food',
+        s: 'Controlled feeding trial. Ultra-processed diet led to 500 more calories per day eaten vs whole food diet, controlling for macros and palatability ratings. <span class="src">Hall et al., NIH, Cell Metabolism, 2019.</span>',
+        y: 'Carlos Monteiro (U São Paulo) introduced the NOVA food classification, separating ultra-processed from minimally processed. It is now used in global nutrition policy.',
+        e: 'Read ingredients. If unfamiliar items appear (e.g., 10+ additives), put it back. 80/20 rule on whole vs processed.' },
+      '41': { t: 'Less or no alcohol',
+        s: 'No safe level of alcohol consumption for overall health. Cancer and cardiovascular risks rise with any consistent intake. <span class="src">GBD 2016 Alcohol Collaborators, The Lancet, 2018.</span>',
+        y: 'Andrew Huberman\'s 2022 podcast on alcohol\'s effects drove a wave of public reassessment of social drinking habits.',
+        e: 'Cap at low (under 5 drinks/week) or zero. Sober alternatives. Re-examine social patterns built around drinking.' },
+      '42': { t: 'No smoking or vaping',
+        s: 'Smoking causes ~8 million deaths annually globally. Lifetime smokers lose ~10 years of life expectancy. <span class="src">WHO Tobacco Fact Sheets. Doll et al., 50-year British Doctors Study.</span>',
+        y: 'Allen Carr\'s Easy Way to Stop Smoking (1985) has helped millions quit by reframing the addiction rather than tapering nicotine. Widely cited in cessation literature.',
+        e: 'Stop completely. Nicotine replacement therapy if needed. Vaping is not a safe alternative; clean it out too.' },
+      '43': { t: 'Limit screen time',
+        s: 'Dose-response between screen time and depressive symptoms, especially above 4 to 5 hours/day. <span class="src">Twenge and Campbell, Preventive Medicine Reports, 2018.</span>',
+        y: 'Tristan Harris (former Google design ethicist) founded the Center for Humane Technology to surface how attention-economy products optimize for compulsion, not wellbeing.',
+        e: 'Track screen time weekly. Aim for under 3 hours non-work. Use grayscale mode. Delete apps you don\'t need on your phone.' },
+      '44': { t: 'Phone-free mornings',
+        s: 'Cortisol awakening response peaks within ~30 min of waking. Stress-loaded morning input (news, email, social) elevates cortisol baseline for the day. <span class="src">Wüst et al., Stress, 2000. CAR literature.</span>',
+        y: 'Tim Ferriss and many morning-routine profilers report a "first 60 minutes are mine" rule across high-performer interviews.',
+        e: 'No phone for the first 60 to 90 min after waking. Coffee, water, movement, journal first. Email after 09:00.' },
+      '45': { t: 'Single-task on purpose',
+        s: 'Multitasking degrades performance ~40%. Heavy multitaskers perform worse at filtering even when not multitasking. <span class="src">Rubinstein, Meyer, Evans, Journal of Experimental Psychology, 2001. Ophir, Nass, Wagner, Stanford, 2009.</span>',
+        y: 'Sophie Leroy (U Washington) coined "attention residue" - the cognitive drag from switching between unfinished tasks. The cost is real and persistent.',
+        e: 'One tab. One task. Phone in another room. Pomodoro 25 min focused, 5 min break.' },
+      '46': { t: 'Say hard truths early',
+        s: 'Stonewalling (avoidance) is one of the four behaviors most predictive of relationship breakdown. <span class="src">John Gottman, University of Washington, "Four Horsemen" research, 30+ years.</span>',
+        y: 'Kim Scott\'s Radical Candor (2017) argued direct truth-telling with care is the only sustainable management style, drawn from her Google and Apple experience.',
+        e: 'Say the hard thing within 48 hours of the trigger. Use care, but say it. Avoidance compounds. Honesty resets.' },
+      '47': { t: 'Full apologies when wrong',
+        s: 'Six components predict forgiveness in apology research. Acknowledgment, explanation, remorse, declaration of repentance, offer of repair, request for forgiveness. <span class="src">Lewicki, Polin, Lount, Negotiation and Conflict Management Research, 2016.</span>',
+        y: 'Harriet Lerner\'s Why Won\'t You Apologize? (2017) made the case that incomplete apologies (the "but" apology especially) damage more than no apology.',
+        e: 'When wrong, name what you did. State the impact. Express remorse. No "but." Ask what would help.' },
+      '48': { t: 'Gratitude practice',
+        s: '3-week gratitude journaling intervention raised wellbeing measurably, with effects lasting months. <span class="src">Emmons and McCullough, UC Davis, Journal of Personality and Social Psychology, 2003.</span>',
+        y: 'Oprah Winfrey credited a daily 5-item gratitude journal practice for decades as her single most valuable habit.',
+        e: '3 to 5 items each morning or evening. Specific, not generic. "The coffee was hot" beats "I\'m grateful for everything."' },
+      '49': { t: 'Therapy or coaching when stuck',
+        s: 'Psychotherapy effect sizes (d ~ 0.8 in meta-analyses) are comparable to or larger than many pharmaceutical interventions. Most benefit comes in the first 10 to 20 sessions. <span class="src">APA meta-analyses, multiple decades.</span>',
+        y: 'Phil Stutz and Barry Michels\' The Tools (2012) reframed therapy as skill-building, not just talk. Tim Ferriss has spoken publicly about how therapy reshaped his life.',
+        e: 'Get a therapist or coach. Try 5 sessions before deciding fit. If no fit, switch. Don\'t wait for crisis to start.' },
+      '50': { t: 'Annual solo retreat',
+        s: 'Reflective time outside daily routine improves perspective and planning quality. Executive sabbaticals correlate with better strategic decisions. <span class="src">Bono et al., Academy of Management Journal, 2013.</span>',
+        y: 'Bill Gates\' "Think Weeks" (twice-yearly solo retreats with stacks of books and papers) reportedly shaped major Microsoft strategy decisions for decades.',
+        e: '2 to 5 days alone, once a year. Notebook, books, walks. No agenda. Reflect, plan, listen to yourself.' },
+      '51': { t: 'Long thinking walks',
+        s: 'Walking increased creative idea generation ~60% vs sitting, with the effect persisting after sitting down again. <span class="src">Oppezzo and Schwartz, Stanford, Journal of Experimental Psychology, 2014.</span>',
+        y: 'Charles Dickens walked 15 to 20 miles a day, working out plots on foot. Friedrich Nietzsche wrote in Twilight of the Idols. "All truly great thoughts are conceived by walking."',
+        e: '30 to 90 min walk for thinking, weekly minimum. No music, no podcasts. Let the mind drift.' },
+      '52': { t: 'Quality time with parents while alive',
+        s: 'The average person spends 95% of their total parent-time before age 18. Whatever remains is the long tail. <span class="src">Tim Urban, "The Tail End," Wait But Why, 2015 (popularized this math).</span>',
+        y: 'Tim Urban\'s essay went viral by simply doing the multiplication. Visits per year × remaining likely years. The number is small.',
+        e: 'Calculate visits per year × remaining likely years. Increase deliberately. Calls, presence, listening, learning.' },
+      '53': { t: 'Sleep tracking',
+        s: 'Heart rate variability (HRV) is a sensitive marker of recovery and stress load. Long-term sleep tracking surfaces patterns invisible day to day. <span class="src">HRV literature; Oura, Whoop, and clinical sleep research.</span>',
+        y: 'Matthew Walker has said repeatedly that tracking helps only if the data leads to behavior change. Otherwise it becomes expensive worry.',
+        e: 'Use Oura, Whoop, or Apple Watch. Track weekly trends, not daily numbers. Change one variable at a time.' },
+      '54': { t: 'Workout tracking',
+        s: 'Tracked progressive overload is the largest single driver of muscle gain in trained populations. <span class="src">Strength research; ACSM and NSCA guidelines.</span>',
+        y: 'Mark Rippetoe\'s Starting Strength program centers on a paper logbook for every set, every rep. Linear progression depends on it.',
+        e: 'Notebook or app. Log every set, every rep, every weight. Aim to increase volume or weight weekly.' },
+      '55': { t: 'Hard thing first daily',
+        s: 'Self-control depletes through the day. Difficult work scheduled in the morning gets done; deferred work usually doesn\'t. <span class="src">Baumeister and Vohs, ego depletion research.</span>',
+        y: 'Mark Twain (widely attributed, possibly apocryphal). "If it\'s your job to eat a frog, eat it first thing in the morning." Brian Tracy turned the line into a book.',
+        e: 'Do the most important task first. Before email. Before meetings. 90 min on the hardest thing, every day.' },
+      '56': { t: 'Weekly desk reset',
+        s: 'Cluttered visual environments reduce focus and increase cortisol. <span class="src">Saxbe and Repetti, Personality and Social Psychology Bulletin, 2010.</span>',
+        y: 'Marie Kondo\'s KonMari method (translated to English 2014) brought systematic decluttering to global audiences. The principle (own only what you use) is what survived hype cycles.',
+        e: 'Friday afternoon, 15 min. Clear the desk. File or trash everything. Inbox to zero. Calendar audit.' },
+      '57': { t: 'Quarterly direction review',
+        s: 'Regular review of specific goals is the single strongest predictor of goal achievement, more than goal difficulty or commitment. <span class="src">Locke and Latham, goal-setting theory, 50+ years of research.</span>',
+        y: 'Y Combinator demo day cycles, Jeff Bezos\' annual shareholder letter, and Tony Robbins\' quarterly events all encode the same insight in different forms.',
+        e: 'Block 2 hours. What worked, what didn\'t, what to start, what to stop, what to keep. Write it down.' },
+      '58': { t: 'Annual life audit',
+        s: 'Reflection-driven planning correlates with higher life satisfaction and goal achievement across longitudinal studies. <span class="src">Self-determination theory; goal-setting literature.</span>',
+        y: 'Steve Jobs in his Stanford 2005 commencement. "If today were the last day of my life, would I want to do what I am about to do?" Annual is the formal version.',
+        e: 'One day a year. Walk, journal, audit each domain. Health, work, relationships, money, creative, service. Score and plan.' },
+      '59': { t: 'Reading biographies',
+        s: 'Biographies compress decades of expensive learning into a readable form. The genre is uniquely high-density for transferable patterns. <span class="src">General argument from learning research and Munger\'s mental models work.</span>',
+        y: 'Charlie Munger. "I constantly see people rise in life who are not the smartest. They go to bed every night a little wiser than when they got up." Biography is the cheapest way.',
+        e: '4 to 6 biographies a year. Mix domains. Lincoln, Da Vinci, Marie Curie, Mandela, Kahneman. Take patterns, not prescriptions.' },
+      '60': { t: 'Studying one master per year',
+        s: 'Deep study of one person produces transferable mental models. Surface study of many produces trivia. <span class="src">Mastery learning research; deliberate practice findings.</span>',
+        y: 'Charlie Munger studied Ben Franklin obsessively for decades. Marcus Aurelius studied his teacher Sextus. Tim Ferriss studies Naval Ravikant, Derek Sivers, and others through long interviews.',
+        e: 'Pick one figure per year. Read everything by and about them. Take notes. Try their methods.' },
+      '61': { t: 'Negotiating rates and raises',
+        s: 'Negotiators earn a $500k+ lifetime earnings differential vs non-negotiators starting at age 22. <span class="src">Babcock and Laschever, Women Don\'t Ask, Princeton, 2003.</span>',
+        y: 'Ramit Sethi\'s Briefcase Technique (research a problem the employer has, present a solution before the salary ask) has reportedly produced thousands of $5k+ raises.',
+        e: 'Research the band. Anchor high. Ask in writing. Leave room. Walk away if no.' },
+      '62': { t: 'Investing in daily-use tools',
+        s: 'Time spent with daily-use items (mattress, chair, shoes, knife) is enormous over a life. Quality differential pays back daily for decades. <span class="src">Time-use studies; general consumer durability data.</span>',
+        y: 'Patek Philippe\'s "you never actually own a Patek Philippe" tagline applies broadly to the daily-use category. Few categories are worth premium spending; this is one.',
+        e: 'Premium where it touches your body 4+ hours daily. Mattress, chair, shoes. Skimp where it touches occasionally.' },
+      '63': { t: 'Clean physical environment',
+        s: 'Women who described their homes as cluttered showed higher diurnal cortisol patterns vs those who described them as restful. <span class="src">Saxbe and Repetti, Personality and Social Psychology Bulletin, 2010.</span>',
+        y: 'Cal Newport\'s Deep Work argues physical environment shapes cognitive state more than most people credit. The desk and the mind track each other.',
+        e: 'Daily 5-min reset. Weekly 30-min reset. Quarterly declutter. Floor visible. Surfaces clear.' },
+      '64': { t: 'Intergenerational time',
+        s: 'Older adults with regular intergenerational contact show lower depression and longer cognitive runway. <span class="src">Buchanan et al., The Gerontologist, 2002.</span>',
+        y: 'Multigenerational households were the human norm for most of history. The nuclear family is a recent post-WWII Western pattern.',
+        e: 'Time with people 20+ years older and 20+ years younger than you, monthly minimum. Grandparents, mentors, nieces, nephews.' },
+      '65': { t: 'Vitamin D',
+        s: 'Widespread vitamin D deficiency in populations with limited sun exposure. Optimal range 30 to 50 ng/mL serum. <span class="src">Michael Holick, Boston University, vitamin D research.</span>',
+        y: 'Modern indoor lifestyle and sunscreen use have driven serum D levels down across populations once thought sufficient. Northern latitudes especially affected.',
+        e: '1000 to 4000 IU daily, ideally with K2. Test serum levels twice a year. Adjust dose to hit ~40 ng/mL.' },
+      '66': { t: 'Omega-3',
+        s: 'EPA and DHA intake correlates with lower cardiovascular mortality, especially in low-fish-eating populations. <span class="src">Mozaffarian, Tufts; multiple cohort studies.</span>',
+        y: 'Inuit populations on traditional high-fish diets had near-zero cardiovascular disease rates (Dyerberg and Bang research, 1970s) before dietary transition.',
+        e: '1 to 2g combined EPA+DHA daily from oily fish or supplements. Sardines, mackerel, anchovies on the budget end.' },
+      '67': { t: 'Magnesium',
+        s: 'About half of US adults consume less than the RDA of magnesium. Deficiency linked to poor sleep, muscle cramps, irritability. <span class="src">USDA dietary intake data.</span>',
+        y: 'Magnesium glycinate is widely recommended by sleep researchers and practitioners for sleep onset support, though direct trial data is mixed.',
+        e: '200 to 400mg glycinate before bed. Or eat more leafy greens, nuts, seeds, dark chocolate.' },
+      '68': { t: 'Creatine',
+        s: 'Creatine monohydrate is one of the most studied and safest supplements. Benefits strength, power, and emerging cognitive evidence. <span class="src">Kreider et al., Journal of the International Society of Sports Nutrition, 2017 consensus.</span>',
+        y: 'Creatine became default in elite strength sport in the 1990s. Now used by older adults and women for muscle preservation and brain support.',
+        e: '5g per day, every day. Creatine monohydrate. No loading phase needed. Mix in water or food.' },
+      '69': { t: 'Mobility-specific drills',
+        s: 'Frequent low-volume mobility work outperforms occasional high-volume stretching for joint range. <span class="src">Behm et al., European Journal of Applied Physiology, 2016.</span>',
+        y: 'Kelly Starrett\'s daily 10-min mobility prescription became mainstream through CrossFit and physical therapy circles.',
+        e: '5 to 10 min daily. Focus on joints that bother you. Cossack squat, 90/90 hip, thoracic windmill, wall slides.' },
+      '70': { t: 'Massage or foam rolling',
+        s: 'Self-myofascial release (foam rolling) shows short-term ROM gains and reduced soreness post-exercise. <span class="src">Beardsley and Skarabot, Journal of Bodywork and Movement Therapies, 2015.</span>',
+        y: 'Sports medicine adopted foam rolling broadly in the 2000s after physical therapy circles popularized it for chronic soft tissue tension.',
+        e: '5 to 10 min before or after workouts. Hit IT band, quads, glutes, lats, calves. Slow, sustained pressure.' },
+      '71': { t: 'Fiber-rich eating',
+        s: '25 to 30g fiber daily reduces all-cause mortality risk by 15 to 30% vs lower intakes. Most Western adults eat under 15g daily. <span class="src">Reynolds et al., The Lancet, 2019 meta-analysis.</span>',
+        y: 'Blue Zones populations (Sardinia, Okinawa, Loma Linda, etc.) eat 40g+ fiber daily from plants. Dan Buettner\'s research popularized the longevity connection.',
+        e: '30g+ daily. Vegetables every meal, legumes, whole grains, berries. Add slowly to avoid GI distress.' },
+      '72': { t: 'Fermented foods',
+        s: 'High fermented food intake increased microbiome diversity and reduced inflammatory markers over 10 weeks. <span class="src">Wastyk et al., Stanford, Cell, 2021.</span>',
+        y: 'Sandor Katz (Wild Fermentation, 2003) revived home fermentation in the West. Traditional cultures (Korean kimchi, Eastern European kraut, dairy ferments) preserved daily microbial intake.',
+        e: 'One serving daily. Kimchi, sauerkraut, yogurt, kefir, miso. Cheap and effective microbiome support.' },
+      '73': { t: 'Cool sleeping room',
+        s: 'Core body temperature must drop ~1°C for sleep onset. Rooms around 18°C (65°F) optimize this. <span class="src">Sleep thermoregulation literature; Matthew Walker, Why We Sleep.</span>',
+        y: 'Eight Sleep mattresses (cooling tech) became mainstream as sleep tracking exposed how thermal regulation drives sleep quality.',
+        e: '16 to 19°C bedroom. Open window or cool the room. Light bedding. Warm shower 60 to 90 min before bed.' },
+      '74': { t: 'Dark sleeping room',
+        s: 'Even small light exposure during sleep raises insulin resistance overnight. Melatonin suppression starts at ~50 lux. <span class="src">Mason et al., PNAS, 2022.</span>',
+        y: 'Modern bedrooms leak light from chargers, alarms, streetlights. Pre-electric humans slept in actual darkness.',
+        e: 'Blackout curtains. Cover all device LEDs. Sleep mask if needed. Phone face-down or out of room.' },
+      '75': { t: 'No late caffeine',
+        s: 'Caffeine half-life is 5 to 6 hours. A 14:00 coffee leaves half the dose in your system at 20:00. <span class="src">Drake et al., Journal of Clinical Sleep Medicine, 2013.</span>',
+        y: 'Matthew Walker is widely associated with the "no caffeine after noon" rule. Tolerance is real but doesn\'t eliminate sleep disruption.',
+        e: 'Last caffeine before 12:00 to 14:00 latest. Decaf or herbal after. Track effect on a sleep tracker.' },
+      '76': { t: 'Weekly family or friend dinner',
+        s: 'Eating together correlates with better mental health and stronger family bonds across multiple longitudinal studies. <span class="src">Fiese, Journal of Marriage and Family, 2006.</span>',
+        y: 'Shabbat dinner in Jewish tradition, Sunday lunch in Mediterranean cultures, Sunday roast in British culture all encode the same insight in different forms.',
+        e: 'One weekly dinner with people you love. Phones away. Cook together if possible. Same night every week.' },
+      '77': { t: 'Monthly long-distance friend call',
+        s: 'Phone calls (vs text) trigger stronger oxytocin release and felt connection. Distance friendships need voice contact. <span class="src">Seltzer et al., Proceedings of the Royal Society B, 2010.</span>',
+        y: 'Long-distance friendships die without active maintenance. Casual messaging is not a substitute for synchronous conversation.',
+        e: 'Schedule monthly calls with 3 to 5 long-distance friends. 30 to 60 min. Same day each month, on the calendar.' },
+      '78': { t: 'Spaced repetition for learning',
+        s: 'The forgetting curve (Ebbinghaus, 1885) shows ~70% loss of new info within 24 hours unless reviewed. Spaced repetition counters this systematically. <span class="src">Hermann Ebbinghaus, foundational memory research, 1885.</span>',
+        y: 'Piotr Wozniak built SuperMemo. Anki (open source) has been used by medical students and language learners to retain massive vocabularies over decades.',
+        e: 'Anki or RemNote. 15 to 20 min daily. Add cards from what you read or learn. Review what the system serves.' },
+      '79': { t: 'Second-brain note system',
+        s: 'Knowledge workers who externalize notes systematically retain and connect more information than those who rely on memory alone. <span class="src">Tiago Forte, Building a Second Brain, 2022. Zettelkasten tradition.</span>',
+        y: 'Niklas Luhmann, German sociologist, used a paper Zettelkasten of ~90,000 notes to produce 70 books and 400 articles, citing the system as his main collaborator.',
+        e: 'Pick one tool (Obsidian, Notion, Roam, Apple Notes). Capture everything worth keeping. Connect related notes. Re-read regularly.' },
+      '80': { t: 'Calendar batching',
+        s: 'Context-switching costs ~20 min of refocus time per switch. Batching reduces total switches. <span class="src">Gloria Mark, UC Irvine, attention research, 2008.</span>',
+        y: 'Tim Ferriss popularized email batching (twice a day) and meeting batching (concentrated days) in The 4-Hour Workweek (2007).',
+        e: 'Meetings on Tue/Thu only. Email twice daily. Deep work blocked Mon/Wed/Fri mornings. Block the calendar yourself.' },
+      '81': { t: 'Paycheck auto-split for savings',
+        s: 'Automatic saving dramatically beats willpower-based saving. 401(k) auto-enrollment cut undersaving rates by 40+ points. <span class="src">Richard Thaler, Save More Tomorrow program; Vanguard auto-enrollment data.</span>',
+        y: 'Vanguard\'s auto-enrollment defaults (with Thaler\'s behavioral research input) reshaped retirement saving for millions of US workers.',
+        e: 'Direct deposit splits paycheck before it lands. % to investments, % to high-yield savings, rest to checking. Set and forget.' },
+      '82': { t: 'Quarterly expense audit',
+        s: 'Subscriptions and recurring fees creep up unnoticed. The average household pays $200 to $300/month in forgotten subscriptions. <span class="src">Industry surveys (Rocket Money, West Monroe).</span>',
+        y: 'Mint and Rocket Money built profitable businesses just from surfacing forgotten subscriptions for users.',
+        e: 'Every 3 months, review credit card and bank statements line by line. Cancel anything you\'re not actively using.' },
+      '83': { t: 'Tax optimization',
+        s: 'Tax-advantaged accounts (401k, IRA, HSA, 529) save the median US household tens of thousands of dollars in lifetime taxes when used fully. <span class="src">IRS data; personal finance literature.</span>',
+        y: 'Mr. Money Mustache and personal finance blogs made tax-advantaged accounting accessible to lay readers, popularizing concepts previously confined to CPAs.',
+        e: 'Max retirement accounts. Use HSA if eligible. Annual tax review with a CPA. Tax-loss harvesting in taxable accounts.' },
+      '84': { t: 'Will and estate basics',
+        s: 'About 67% of US adults have no will. Dying intestate falls on family in court time, money, and conflict. <span class="src">Caring.com Wills Survey, annual.</span>',
+        y: 'Prince and Aretha Franklin both died without wills, leading to years of expensive public estate battles. Multi-million-dollar mistakes that hurt families.',
+        e: 'Will, healthcare proxy, durable power of attorney. Living will. Beneficiaries up to date on every account. Review every 3 years.' },
+      '85': { t: 'Insurance review',
+        s: 'Most people are over-insured in some areas and under-insured in others without review. Annual policy audit is one of the highest-ROI hours of the year. <span class="src">Personal finance practitioners (Jonathan Clements, Christine Benz).</span>',
+        y: 'Bogleheads forum and many personal finance writers consistently rank annual insurance review near the top of "high-ROI" tasks.',
+        e: 'Annual review. Health, life, disability, home, auto, umbrella. Cancel what you don\'t need. Add what you\'re missing.' },
+      '86': { t: 'Quarterly declutter',
+        s: 'Possessions cost storage, time, attention, and money long after purchase. Decluttering interventions correlate with reduced cortisol and improved focus. <span class="src">Saxbe and Repetti, 2010; minimalism research.</span>',
+        y: 'Joshua Fields Millburn and Ryan Nicodemus (The Minimalists) document significant life improvements after radical decluttering. Joshua Becker has built a similar movement.',
+        e: '30 to 60 min per quarter. One closet, one drawer, one shelf at a time. Donate, sell, trash. Own only what you use.' },
+      '87': { t: 'Capsule wardrobe',
+        s: 'Reducing wardrobe choices reduces daily decision load. Decision fatigue depletes capacity for harder choices later. <span class="src">Baumeister, Vohs et al., ego depletion research.</span>',
+        y: 'Steve Jobs wore the same outfit (black turtleneck, Levi\'s, New Balance) daily. Mark Zuckerberg the same with grey t-shirts. Both cited decision reduction as the reason.',
+        e: '30 to 50 total items. Coherent palette. Everything coordinates with everything. Replace, don\'t add.' },
+      '88': { t: 'Annual goal review with partner',
+        s: 'Couples who set joint goals report higher relationship satisfaction. Mismatched assumptions are the most common source of partnership drift. <span class="src">Sniezek and Buhrmester, JPSP, 1985. Esther Perel marriage research.</span>',
+        y: 'Esther Perel and many couples therapists recommend formal joint reviews to surface mismatched assumptions before they grow into resentments.',
+        e: 'Annual day. Walk, journal, share. Goals for the partnership, family, finances, health, location. Document together.' },
+      '89': { t: 'Daily small kindness',
+        s: '"Kindness interventions" (5 acts of kindness in a day, weekly) raised happiness measurably over weeks. <span class="src">Lyubomirsky and Layous, Journal of Personality and Social Psychology, 2013.</span>',
+        y: 'Random Acts of Kindness Foundation has tracked decades of qualitative impact data from small consistent kindness habits.',
+        e: 'One small kindness per day. Compliment, hold a door, send a thank-you message. Costless, compounding.' },
+      '90': { t: 'Saying "I love you" often to loved ones',
+        s: 'Verbal affection correlates with relationship satisfaction and child wellbeing across cultures. Explicit verbal love is the unhedged version most people avoid by default. <span class="src">Gulledge et al., American Journal of Family Therapy, 2003. Brené Brown vulnerability research.</span>',
+        y: 'Brené Brown\'s research on vulnerability argues explicit verbal love is the unhedged version most people avoid by default. The risk is the point.',
+        e: 'Say it daily to partner, kids, parents. Add it to texts. Endings of phone calls. Direct, no hedging.' },
+      '91': { t: 'Pet care (if applicable)',
+        s: 'Dog owners had 33% lower mortality risk vs non-owners, with stronger effect in single-person households. <span class="src">Mubanga et al., Scientific Reports, 2017. 3.4M Swedes over 12 years.</span>',
+        y: 'Therapy dogs, service dogs, and emotional support animals shifted from fringe to mainstream as mental health benefit research accumulated through the 2000s.',
+        e: 'If you have capacity, a pet is among the largest emotional compounders available. If not, regular exposure (dog-walking, shelters) helps.' },
+      '92': { t: 'Gardening or growing something',
+        s: 'Gardening interventions for older adults consistently improve mood, cognitive function, and physical activity. <span class="src">Soga, Gaston, Yamaura, Preventive Medicine Reports, 2017 meta-analysis.</span>',
+        y: 'The 2020-2021 pandemic gardening surge renewed mainstream interest. Long-tradition cultures (Japan, Mediterranean) have always integrated growing into adult life.',
+        e: 'One pot of herbs minimum. Tomato plant if space allows. Garden bed if ground available. Tend it, eat from it.' },
+      '93': { t: 'Music listening practice',
+        s: 'Active music listening (focused, not background) reduces cortisol and elevates dopamine and oxytocin. <span class="src">Daniel Levitin, This Is Your Brain on Music, 2006. Neuroscience of music literature.</span>',
+        y: 'Hans Zimmer\'s compositions are deliberately built to enhance focus. Brian Eno designed Music for Airports (1978) to be heard at the edge of attention.',
+        e: '30 to 60 min daily of deliberate listening. Headphones, eyes closed if possible. Albums in full, not shuffle.' },
+      '94': { t: 'Music creation practice',
+        s: 'Learning a musical instrument as an adult produces measurable cognitive benefits and gray matter changes. <span class="src">Schlaug et al., Annals of the New York Academy of Sciences, 2009.</span>',
+        y: 'Brian Eno and many older creators have spoken about taking up instruments late in life as a cognitive and emotional anchor against decline.',
+        e: 'Pick an instrument. 15 to 30 min daily. Don\'t aim for performance; aim for presence. Badly is fine.' },
+      '95': { t: 'Travel for perspective (annual)',
+        s: 'Comfort zone disruption (especially multicultural experience) produces measurable cognitive flexibility gains. <span class="src">Maddux and Galinsky, JPSP, 2009.</span>',
+        y: 'Anthony Bourdain spent decades arguing that travel as a witness, not consumer, reshapes how you see your own life. His shows centered on long meals with strangers.',
+        e: 'One meaningful trip per year. Different culture if possible. Stay long enough to dent the routine (2+ weeks).' },
+      '96': { t: 'Cooking with others',
+        s: 'Shared meal preparation correlates with relationship satisfaction across studies. Cooking as a couple activity rates highly with long-married couples. <span class="src">Gallup family rituals research; Fiese family meals research.</span>',
+        y: 'Slow Food movement (Carlo Petrini, founded 1986 in Italy) made shared cooking a political and cultural reclamation against fast food culture.',
+        e: 'One meal a week prepared with someone you love. Music, wine optional, conversation mandatory.' },
+      '97': { t: 'Volunteering monthly',
+        s: 'Volunteers with altruistic motives showed lower mortality. Self-focused volunteering didn\'t produce the same effect. <span class="src">Konrath et al., Health Psychology, 2012.</span>',
+        y: 'AmeriCorps, Peace Corps, and many faith-based volunteer programs have decades of alumni outcome data showing wellbeing and meaning benefits.',
+        e: 'One monthly volunteer commitment. Same place, same people, same day. Build relationships, not just hours.' },
+      '98': { t: 'Donating a fixed percent of income',
+        s: 'Committed % giving sustains over decades better than ad hoc donations. <span class="src">Giving What We Can (effective altruism pledge) data; religious tithing data.</span>',
+        y: 'Andrew Carnegie\'s Gospel of Wealth (1889) argued the wealthy have a duty to give. His libraries (founded with US Steel proceeds) still serve millions.',
+        e: '5 to 10% of income. One or two causes deeply, not many shallowly. Set up automated monthly transfer.' },
+      '99': { t: 'Hand-written letters',
+        s: 'Handwriting engages more brain regions than typing. Recipients consistently rate handwritten letters as more impactful. <span class="src">Mueller and Oppenheimer, Psychological Science, 2014 (note-taking research).</span>',
+        y: 'Shaun Usher\'s Letters of Note (book series, 2013+) celebrates handwritten correspondence as a cultural form. The personal cost of a real letter is what creates value for the recipient.',
+        e: 'One handwritten letter a month. Thank-you, congratulations, just-thinking-of-you. Stamps, paper, presence.' },
+      '100': { t: 'Reading aloud',
+        s: 'Children read to daily develop larger vocabularies and stronger comprehension across 30 years of literacy research. <span class="src">Jim Trelease, The Read-Aloud Handbook, multiple editions, citing 30+ years of research.</span>',
+        y: 'Trelease\'s Read-Aloud Handbook (1982 onward) became the bible of parent-led literacy in the US. Voice changes how content is received.',
+        e: '15 to 30 min nightly with kids if applicable. Adults. Read poetry aloud. Read a great novel to a partner.' },
+      'N1': { t: 'Chronic sleep deprivation',
+        s: 'Chronic sleep under 6 hours associated with ~13% higher mortality. Cognitive impairment after 17 to 19 hours awake is similar to 0.05% blood alcohol. <span class="src">Cappuccio et al., Sleep, 2010. Dawson and Reid, Nature, 1997.</span>',
+        y: '1986 Chernobyl meltdown, 1986 Challenger disaster, and 1989 Exxon Valdez oil spill all involved acute sleep deprivation in key decision-makers.',
+        e: 'Anchor a sleep schedule first. If chronic insomnia, CBT-i is the gold standard treatment, not medication.' },
+      'N2': { t: 'Toxic long-term relationship',
+        s: 'Toxic relationships predict worse health outcomes than no relationships at all. Cortisol stays elevated indefinitely; immune function suffers. <span class="src">Holt-Lunstad et al., Annual Review of Psychology, 2018. Kiecolt-Glaser, Ohio State, marital conflict research.</span>',
+        y: 'Janice Kiecolt-Glaser\'s lab at Ohio State measured wound healing, cytokine response, and immune markers in high-conflict couples over decades. The biology of bad marriages is real.',
+        e: 'Couples therapy with a qualified clinician. If repeated failure, leaving is the higher-CER move.' },
+      'N3': { t: 'Unmanaged chronic stress',
+        s: 'Chronic stress elevates cortisol, suppresses immune function, accelerates telomere shortening, and raises cardiovascular risk. <span class="src">Epel et al., PNAS, 2004 (telomere shortening in caregiver stress).</span>',
+        y: 'Robert Sapolsky\'s Why Zebras Don\'t Get Ulcers (1994) made the chronic-stress / disease link accessible. Zebras only stress during the chase; humans stay in chase mode for years.',
+        e: 'Identify and remove or restructure top 3 stressors. Daily nervous system reset (breath, walk, sleep). Therapy if structural.' },
+      'N4': { t: 'Sedentary as default',
+        s: 'Sitting more than 8 hours/day with no exercise predicts mortality risk similar to obesity or smoking. <span class="src">Ekelund et al., The Lancet, 2016 meta-analysis of 1M+ adults.</span>',
+        y: 'James Levine (Mayo Clinic) coined "sitting is the new smoking" in 2014 and developed treadmill desks before standing desks went mainstream.',
+        e: 'Stand every 30 min. Walk every 60 min. 7,500+ steps daily floor. Active hobbies on weekends.' },
+      'N5': { t: 'Daily doomscrolling',
+        s: 'Heavy social media users (3+ hours/day) show 2 to 3x higher rates of depression, anxiety, and sleep disruption vs light users. <span class="src">Twenge, Martin, Campbell, Preventive Medicine Reports, 2018 onward.</span>',
+        y: 'Tristan Harris and the Center for Humane Technology detailed how feed algorithms optimize for engagement over wellbeing, by design. The Social Dilemma (2020) brought this to mass audiences.',
+        e: 'Delete apps from phone (use browser only). Grayscale mode. Time limits enforced. Replace with reading.' },
+      'N6': { t: 'Heavy regular alcohol',
+        s: 'No safe level of alcohol consumption for overall health. Cancer and cardiovascular risks rise with any consistent intake. <span class="src">GBD 2016 Alcohol Collaborators, The Lancet, 2018.</span>',
+        y: 'Andrew Huberman\'s 2022 podcast on alcohol pushed the research case for zero or near-zero consumption into popular awareness, prompting many to reassess social drinking.',
+        e: 'Cap at low (under 5 drinks/week) or zero. Sober alternatives. Re-examine social patterns built around drinking.' },
+      'N7': { t: 'Smoking or vaping',
+        s: 'Smoking causes ~8M deaths globally per year. Lifetime smokers lose ~10 years of life expectancy. Vaping long-term safety unknown; acute lung injury cases exist. <span class="src">WHO Tobacco Fact Sheets. CDC EVALI data.</span>',
+        y: 'Master Settlement Agreement (1998) revealed decades of tobacco industry concealment of harm. Allen Carr\'s method has helped millions quit through reframing rather than tapering.',
+        e: 'Stop completely. Nicotine replacement therapy if needed. No transition to vaping; it\'s a different problem.' },
+      'N8': { t: 'High-interest revolving debt',
+        s: 'US credit card APRs averaged 20%+ in 2024-2025. Compound interest at 20% doubles balances every ~3.5 years. <span class="src">Federal Reserve consumer credit data.</span>',
+        y: 'Dave Ramsey\'s snowball method has helped millions clear consumer debt by reordering psychology around small wins. Avalanche (highest rate first) is mathematically optimal.',
+        e: 'Stop adding debt today. Snowball or avalanche the balance. Avoid the 0% promo trap; pay it off before promo ends.' },
+      'N9': { t: 'Chronic negative self-talk',
+        s: 'Internal monologue patterns predict mood disorders and behavioral outcomes. The narrator becomes the lived experience. <span class="src">Ethan Kross, Chatter, 2021; cognitive behavioral therapy literature.</span>',
+        y: 'Kristin Neff (UT Austin) developed self-compassion research, finding self-criticism counterproductive even for high achievers. Self-compassion outperforms self-criticism on every measured outcome.',
+        e: 'Catch the voice. Name it. Talk to yourself like you\'d talk to a friend you respect.' },
+      'N10': { t: 'Permanently avoiding hard conversations',
+        s: 'Gottman\'s four horsemen (criticism, contempt, defensiveness, stonewalling) predict ~90% of divorces. Stonewalling (chronic avoidance) is the slowest poison. <span class="src">John Gottman, University of Washington.</span>',
+        y: 'Susan David (Harvard, Emotional Agility, 2016) argued unaddressed emotions don\'t dissipate; they shape behavior from the basement.',
+        e: '48-hour rule. Hard things spoken within 48 hours of the trigger. Use care, but say them.' },
+      'N11': { t: 'Ultra-processed food as default',
+        s: 'Ultra-processed diet led to 500 more calories per day eaten vs whole food diet, matched for macros and palatability ratings. <span class="src">Hall et al., NIH, Cell Metabolism, 2019.</span>',
+        y: 'Carlos Monteiro (U São Paulo) introduced the NOVA food classification, separating ultra-processed from minimally processed. It is now used in global nutrition policy and research.',
+        e: 'Read ingredients. If unfamiliar additives appear (10+ items), put it back. 80/20 rule on whole vs processed.' },
+      'N12': { t: 'Compulsive porn use',
+        s: 'Behavioral and neural patterns in compulsive porn users resemble substance dependence. Effects include relationship dissatisfaction and erectile issues in younger men. <span class="src">Voon et al., PLOS One, 2014.</span>',
+        y: 'Gary Wilson\'s Your Brain on Porn (2014) and the r/nofap community documented widespread self-reported harm and recovery from cessation, prompting clinical research.',
+        e: 'Cut completely for 90 days minimum. Use blockers (SelfControl, Cold Turkey). Replace with in-person connection.' },
+      'N13': { t: 'Gambling or speculative betting',
+        s: 'Pathological gambling activates the same dopamine pathways as cocaine. 1 to 3% of adults meet criteria for gambling disorder. <span class="src">Reuter et al., Nature Neuroscience, 2005. DSM-5 prevalence data.</span>',
+        y: 'Post-2018 US sports betting expansion (PASPA repeal) has driven a measurable spike in gambling addiction treatment requests across multiple states.',
+        e: 'Zero. Avoid betting apps, sports betting, day trading framed as investing. Treat as an addictive substance.' },
+      'N14': { t: 'Hate-watching social media',
+        s: 'Following accounts that anger or stress you raises cortisol baseline, even from brief exposure. <span class="src">Verduyn et al., Journal of Experimental Psychology General, 2015.</span>',
+        y: 'Eli Pariser\'s The Filter Bubble (2011) introduced "ratchet effect" of outrage media. The longer you follow outrage, the more your feed serves it.',
+        e: 'Unfollow ruthlessly. Mute keywords. If a feed makes you angry without action, prune.' },
+      'N15': { t: 'Working to impress people you don\'t like',
+        s: 'Status-driven achievement correlates with lower long-term wellbeing than mastery-driven achievement. <span class="src">Sheldon and Kasser, JPSP, 1998. Self-determination theory.</span>',
+        y: 'Naval Ravikant on extrinsic vs intrinsic motivation has been widely quoted. The trap of "playing other people\'s games" eats decades.',
+        e: 'Audit current commitments. Which serve your goals? Which serve others\' approval? Drop the latter.' },
+      'N16': { t: 'Saying yes to every commitment',
+        s: 'Time poverty correlates with mental health symptoms more than financial poverty in many studies. <span class="src">Whillans et al., PNAS, 2017.</span>',
+        y: 'Greg McKeown\'s Essentialism (2014) and Derek Sivers\' "Hell yeah or no" target the same problem from different angles.',
+        e: 'Default to no. Bar is "hell yes" for new commitments. Audit existing yes-stack; cut 25%.' },
+      'N17': { t: 'Holding grudges',
+        s: 'Forgiveness interventions reduce anxiety, depression, and cardiovascular markers. <span class="src">Toussaint, Worthington, Williams, Journal of Behavioral Medicine, 2016.</span>',
+        y: 'Nelson Mandela on his 1990 release. "As I walked out the door toward the gate that would lead to my freedom, I knew if I didn\'t leave my bitterness and hatred behind, I\'d still be in prison."',
+        e: 'Name the resentment. Write the unsent letter. Decide consciously to release. Repeat if needed.' },
+      'N18': { t: 'Living beyond your means',
+        s: '60%+ of US adults live paycheck to paycheck regardless of income. Lifestyle creep tracks income closely. <span class="src">Bankrate and NerdWallet financial surveys, multi-year.</span>',
+        y: 'Stanley and Danko\'s The Millionaire Next Door (1996) documented how most US millionaires live below their means; flashy lifestyles tend to mask financial fragility.',
+        e: 'Cap lifestyle at a percent of income. Redirect raises to savings. Audit recurring spend.' },
+      'N19': { t: 'Letting friendships die from neglect',
+        s: 'Adult friendship loss accelerates after marriage, kids, and career consolidation. Most adults under-invest by their own admission. <span class="src">Demir, Journal of Happiness Studies, 2010. Surgeon General loneliness advisory, 2023.</span>',
+        y: 'The "friendship recession" has been documented in popular press post-2020 as remote work and screen-time shifts accelerated existing trends.',
+        e: 'Calendar friendships. Recurring slots. Initiate. Show up. Friendships die from inattention, not conflict.' },
+      'N20': { t: 'Skipping medical checkups',
+        s: 'Most preventable serious illness shows warning signs years in advance via routine screening. US adults are notably under-screened despite access. <span class="src">USPSTF guidelines; CDC screening data.</span>',
+        y: 'Steve Jobs delayed conventional treatment for pancreatic cancer in 2003, opting for alternative approaches first. He later regretted the delay publicly.',
+        e: 'Annual physical and dental. Recommended screenings on schedule (colonoscopy, derm, cardiologist if family history). Don\'t skip.' },
+      'N21': { t: 'Chronic complaining as identity',
+        s: 'Verbal complaint patterns reshape neural pathways toward negative bias. Chronic complainers literally see more to complain about over time. <span class="src">Hebbian neuroplasticity; mood and cognition research.</span>',
+        y: 'Martin Seligman\'s Learned Optimism (1991) and learned helplessness research showed pessimism feels protective but doesn\'t predict better outcomes. Optimists outperform on most measured metrics.',
+        e: 'Track yourself for one day. Catch each complaint. Replace one third with action or acceptance.' },
+      'N22': { t: 'Comparing yourself to curated highlights',
+        s: 'Social media comparison correlates with increased depression, especially in women under 30. <span class="src">Vogel et al., Psychology of Popular Media Culture, 2015.</span>',
+        y: 'Theodore Roosevelt. "Comparison is the thief of joy." The structural issue is comparing your behind-the-scenes to others\' highlight reel.',
+        e: 'Limit feeds. Unfollow accounts that trigger comparison. Compare yourself to your own past, not others\' present.' },
+      'N23': { t: 'Habitual all-nighters',
+        s: 'Acute sleep deprivation followed by recovery sleep does not fully restore cognitive function. Habitual pattern compounds damage. <span class="src">Banks and Dinges, Journal of Clinical Sleep Medicine, 2007.</span>',
+        y: 'Tech and startup culture have romanticized all-nighters for decades. Recent research has reframed them as anti-productivity moves that look heroic but cost more than they produce.',
+        e: 'Plan to never. If unavoidable for a hard deadline, recover deliberately over 3+ days after.' },
+      'N24': { t: 'Refusing to ask for help',
+        s: 'Help-seeking is associated with faster recovery from setbacks and stronger network durability. People are far more likely to help than askers expect. <span class="src">Bohns and Flynn, Personality and Social Psychology Bulletin, 2010.</span>',
+        y: 'Adam Grant\'s research at Wharton has repeatedly found the internal block to asking is mostly self-imposed. Givers want to be asked.',
+        e: 'Identify one thing you\'ve been struggling with alone. Ask one specific person for help this week. Practice.' },
+      'N25': { t: 'Optimizing for a role you don\'t want',
+        s: 'Job-domain misalignment is the largest single source of self-reported unhappiness in employed adults. <span class="src">Gallup engagement data, 20+ years; State of the Global Workplace reports.</span>',
+        y: 'Steve Jobs in his Stanford 2005 commencement. "If today were the last day of my life, would I want to do what I am about to do?" Apply quarterly.',
+        e: 'Audit. Does this role match what you\'d choose if starting fresh? If no for 12+ months, plan an exit.' }
+    };
+
+    // ========= TABS / VIEW =========
     function setView(name) {
       tabs.forEach(t => {
         const on = t.dataset.view === name;
@@ -1244,22 +1922,73 @@
 
     searchBox.addEventListener('input', e => runFilter(e.target.value));
 
-    // Shuffle: pick a random card from currently active view, scroll to it, flash it
+    // ========= MODAL =========
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalBox = document.getElementById('modalBox');
+    const modalClose = document.getElementById('modalClose');
+    const modalNum = document.getElementById('modalNum');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalStat = document.getElementById('modalStat');
+    const modalStory = document.getElementById('modalStory');
+    const modalExample = document.getElementById('modalExample');
+
+    function openModal(num, isNcer) {
+      const data = cardData[num];
+      if (!data) return;
+      modalNum.textContent = isNcer ? 'NCER · ' + num : 'No. ' + num;
+      modalTitle.textContent = data.t;
+      modalStat.innerHTML = data.s;
+      modalStory.innerHTML = data.y;
+      modalExample.innerHTML = data.e;
+      modalBox.classList.toggle('ncer', !!isNcer);
+      modalOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', e => {
+      if (e.target === modalOverlay) closeModal();
+    });
+
+    // Attach click handlers to all cards
+    document.querySelectorAll('.card').forEach(card => {
+      const numEl = card.querySelector('.num-badge');
+      if (!numEl) return;
+      const num = numEl.textContent.trim();
+      const isNcer = card.classList.contains('ncer-card');
+      // Add a hover hint
+      const hint = document.createElement('span');
+      hint.className = 'more-hint';
+      hint.textContent = 'click ↗';
+      card.appendChild(hint);
+      card.addEventListener('click', () => openModal(num, isNcer));
+    });
+
+    // ========= SHUFFLE =========
     shuffleBtn.addEventListener('click', () => {
       const active = document.querySelector('.view.active');
       if (!active) return;
       const cards = active.querySelectorAll('.card:not(.hidden), .anchor');
       if (!cards.length) return;
       const pick = cards[Math.floor(Math.random() * cards.length)];
-      // remove any prior flash
       document.querySelectorAll('.flash').forEach(c => c.classList.remove('flash'));
       pick.scrollIntoView({ behavior: 'smooth', block: 'center' });
       setTimeout(() => pick.classList.add('flash'), 280);
       setTimeout(() => pick.classList.remove('flash'), 1900);
     });
 
-    // Alt + arrow keys to flip through tabs
+    // ========= KEYBOARD =========
     document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('open')) {
+        e.preventDefault();
+        closeModal();
+        return;
+      }
       if (!e.altKey) return;
       const order = ['lifetime', 'twenties', 'thirties', 'forties', 'fifties', 'sixties'];
       const current = order.findIndex(id => document.getElementById(id).classList.contains('active'));
