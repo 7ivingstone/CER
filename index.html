@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>100 Habits to Steal · The CER Sticker Book</title>
+<title>100 Habits to Steal · Shop & Build Your Plan</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Caprasimo&family=Funnel+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -59,7 +60,7 @@
 
   /* HEADER ------------------------------------------------------ */
   header.top {
-    padding: 56px clamp(20px, 6vw, 90px) 36px;
+    padding: 22px clamp(20px, 4vw, 60px) 18px;
     position: relative;
     z-index: 2;
   }
@@ -69,12 +70,27 @@
     justify-content: space-between;
     align-items: center;
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    margin-bottom: 28px;
+    margin-bottom: 14px;
     flex-wrap: wrap;
     gap: 10px;
+  }
+
+  .header-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    align-items: end;
+  }
+
+  @media (min-width: 980px) {
+    .header-grid {
+      grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr);
+      gap: 48px;
+      align-items: end;
+    }
   }
 
   .stamp {
@@ -97,36 +113,45 @@
   h1.title {
     font-family: var(--display);
     font-weight: 400;
-    font-size: clamp(64px, 13vw, 188px);
-    line-height: 0.86;
-    letter-spacing: -0.02em;
-    margin: 16px 0 8px;
+    font-size: clamp(44px, 6vw, 76px);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    margin: 4px 0 6px;
+    white-space: normal;
+  }
+
+  /* mobile and narrow desktop default: stacked title */
+  h1.title br { display: inline; }
+
+  /* wide desktop: single line */
+  @media (min-width: 1300px) {
+    h1.title br { display: none; }
+    h1.title { white-space: nowrap; }
   }
 
   h1.title .L1 { color: var(--coral); display: inline-block; transform: rotate(-2deg); }
   h1.title .L2 { color: var(--ink); }
   h1.title .L3 { color: var(--blue); display: inline-block; transform: rotate(2deg); }
   h1.title .L4 { color: var(--mint); }
-  h1.title .L5 { color: var(--hot-pink); display: inline-block; transform: rotate(-1deg); }
 
   .subline {
     font-family: var(--sub);
     font-weight: 400;
-    font-size: clamp(20px, 2.4vw, 28px);
+    font-size: clamp(16px, 1.5vw, 21px);
     color: var(--ink-soft);
-    margin-top: 18px;
-    max-width: 38ch;
-    line-height: 1.2;
+    margin-top: 14px;
+    max-width: 42ch;
+    line-height: 1.25;
   }
 
   .what-is-cer {
-    margin-top: 30px;
+    margin-top: 0;
     display: inline-block;
     background: var(--paper-2);
     border: var(--line-thick);
     box-shadow: var(--shadow);
-    padding: 18px 22px;
-    max-width: 560px;
+    padding: 14px 18px 14px;
+    max-width: 100%;
     transform: rotate(-0.6deg);
     position: relative;
   }
@@ -148,16 +173,33 @@
 
   .what-is-cer p {
     font-family: var(--sans);
-    font-size: 15px;
-    line-height: 1.5;
+    font-size: 13.5px;
+    line-height: 1.45;
     color: var(--ink);
   }
 
   .what-is-cer strong {
     font-family: var(--sub);
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     color: var(--coral);
+  }
+
+  .what-is-cer .cer-organize {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1.5px dashed var(--ink);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .what-is-cer .cer-ncer {
+    background: var(--ink);
+    color: var(--hot-pink);
+    padding: 1px 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
   }
 
   /* TAB STRIP --------------------------------------------------- */
@@ -165,7 +207,7 @@
     position: sticky;
     top: 0;
     background: var(--paper);
-    padding: 14px clamp(20px, 6vw, 90px);
+    padding: 10px clamp(20px, 4vw, 60px);
     z-index: 50;
     border-bottom: var(--line-thick);
   }
@@ -259,7 +301,7 @@
   .search-wrap.hidden { display: none; }
 
   /* MAIN -------------------------------------------------------- */
-  main { padding: 40px clamp(20px, 6vw, 90px) 80px; position: relative; z-index: 1; }
+  main { padding: 28px clamp(20px, 4vw, 60px) 80px; position: relative; z-index: 1; }
 
   .view { display: none; animation: pop 380ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }
   .view.active { display: block; }
@@ -270,23 +312,23 @@
   }
 
   /* TIER SECTIONS ---------------------------------------------- */
-  section.tier { margin-bottom: 60px; position: relative; }
+  section.tier { margin-bottom: 44px; position: relative; }
 
   .tier-banner {
     display: flex;
     align-items: center;
-    gap: 18px;
-    margin-bottom: 32px;
+    gap: 16px;
+    margin-bottom: 22px;
     flex-wrap: wrap;
   }
 
   .tier-letter {
     font-family: var(--display);
-    font-size: clamp(72px, 9vw, 130px);
+    font-size: clamp(54px, 6vw, 92px);
     line-height: 0.85;
     background: var(--coral);
     color: var(--paper);
-    padding: 8px 28px;
+    padding: 4px 22px;
     border: var(--line-thick);
     box-shadow: var(--shadow);
     transform: rotate(-3deg);
@@ -316,11 +358,11 @@
 
   .squiggle-divider {
     width: 100%;
-    height: 14px;
-    margin: 8px 0 28px;
+    height: 12px;
+    margin: 0 0 18px;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 14' preserveAspectRatio='none'><path d='M0 7 Q 10 0, 20 7 T 40 7 T 60 7 T 80 7' fill='none' stroke='%2318181a' stroke-width='2.5' stroke-linecap='round'/></svg>");
     background-repeat: repeat-x;
-    background-size: 80px 14px;
+    background-size: 80px 12px;
   }
 
   /* CARDS / STICKERS ------------------------------------------- */
@@ -928,6 +970,221 @@
     .view { display: block !important; page-break-before: always; }
     .card, .anchor { break-inside: avoid; box-shadow: none; transform: none; }
   }
+
+  /* ============ SHOPPING CART UI ============ */
+  body.has-cart { padding-bottom: 110px; }
+
+  .price-pill {
+    position: absolute; top: -10px; right: 14px;
+    background: var(--ink); color: var(--paper); border: 2px solid var(--ink);
+    padding: 3px 9px; font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.04em; transform: rotate(3deg); z-index: 2; pointer-events: none;
+  }
+  .tier-S .price-pill { background: var(--coral); color: var(--ink); }
+  .tier-A .price-pill { background: var(--blue); color: var(--paper); }
+  .tier-B .price-pill { background: var(--mint); color: var(--ink); }
+  .tier-C .price-pill { background: var(--yellow); color: var(--ink); }
+  .ncer-card .price-pill { background: var(--yellow); color: var(--ink); }
+
+  .add-btn {
+    display: inline-block; margin-top: 12px; padding: 6px 12px;
+    background: var(--paper); color: var(--ink); border: 2px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+    font-family: var(--sub); font-size: 13px; cursor: pointer;
+    transition: transform 120ms, box-shadow 120ms, background 120ms;
+    user-select: none;
+  }
+  .add-btn:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--ink); }
+  .add-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+  .add-btn.added { background: var(--mint); }
+  .add-btn.disabled {
+    background: var(--paper-2); color: var(--ink-soft); cursor: not-allowed;
+    box-shadow: 2px 2px 0 var(--ink-soft); border-color: var(--ink-soft);
+  }
+  .ncer-card .add-btn { background: var(--hot-pink); color: var(--paper); }
+  .ncer-card .add-btn.added { background: var(--yellow); color: var(--ink); }
+
+  .modal-add-btn {
+    display: block; width: 100%; margin-top: 14px; padding: 14px;
+    background: var(--coral); color: var(--paper); border: 3px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink); font-family: var(--sub); font-size: 18px;
+    cursor: pointer; transition: transform 120ms, box-shadow 120ms; text-align: center;
+  }
+  .modal-add-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+  .modal-add-btn.added { background: var(--mint); color: var(--ink); }
+  .modal-add-btn.disabled {
+    background: var(--paper-2); color: var(--ink-soft); cursor: not-allowed;
+    border-color: var(--ink-soft); box-shadow: 2px 2px 0 var(--ink-soft);
+  }
+  .modal-box.ncer .modal-add-btn { background: var(--hot-pink); color: var(--paper); }
+
+  .cart-bar {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 70;
+    background: var(--ink); color: var(--paper); padding: 14px clamp(16px, 3vw, 40px);
+    display: none; align-items: center; gap: 18px; flex-wrap: wrap;
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.15);
+  }
+  .cart-bar.visible { display: flex; }
+  .cart-bar-count {
+    font-family: var(--display); font-size: 24px; color: var(--coral);
+    line-height: 1; min-width: 36px; text-align: center;
+  }
+  .cart-bar-fill-wrap { flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 4px; }
+  .cart-bar-fill-row {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+    color: rgba(255,241,198,0.7);
+  }
+  .cart-bar-fill {
+    position: relative; height: 14px; background: rgba(255,241,198,0.12);
+    border: 2px solid var(--paper); overflow: hidden;
+  }
+  .cart-bar-fill-inner {
+    height: 100%; background: linear-gradient(90deg, var(--mint), var(--coral));
+    transition: width 280ms ease; max-width: 100%;
+  }
+  .cart-bar-fill-overflow {
+    position: absolute; top: 0; right: 0; height: 100%;
+    background: repeating-linear-gradient(45deg, var(--hot-pink) 0 6px, #c0246a 6px 12px);
+    transition: width 280ms ease;
+  }
+  .cart-bar-over { color: var(--hot-pink); font-weight: 600; }
+  .cart-bar-btn {
+    padding: 10px 18px; background: var(--yellow); color: var(--ink);
+    border: 2px solid var(--paper); box-shadow: 3px 3px 0 var(--paper);
+    font-family: var(--sub); font-size: 14px; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    transition: transform 120ms, box-shadow 120ms;
+  }
+  .cart-bar-btn:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--paper); }
+  .cart-bar-btn.primary { background: var(--coral); color: var(--paper); }
+
+  .cart-drawer {
+    position: fixed; background: var(--paper); z-index: 80;
+    transition: transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow-y: auto;
+    bottom: 0; left: 0; right: 0;
+    max-height: 78vh; border-top: 4px solid var(--ink);
+    transform: translateY(100%); box-shadow: 0 -10px 0 var(--ink);
+  }
+  .cart-drawer.open { transform: translateY(0); }
+  @media (min-width: 1100px) {
+    .cart-drawer {
+      top: 0; right: 0; bottom: 0; left: auto;
+      width: 440px; max-height: 100vh;
+      border-top: none; border-left: 4px solid var(--ink);
+      transform: translateX(100%); box-shadow: -10px 0 0 var(--ink);
+    }
+    .cart-drawer.open { transform: translateX(0); }
+  }
+  .cart-drawer-inner { padding: 28px 24px 80px; }
+  .cart-drawer-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 22px; padding-bottom: 16px; border-bottom: 2px solid var(--ink);
+  }
+  .cart-drawer-head h2 { font-family: var(--sub); font-size: 28px; line-height: 1; color: var(--ink); }
+  .cart-drawer-close {
+    width: 38px; height: 38px; background: var(--coral); border: 2px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--ink); cursor: pointer; font-family: var(--display);
+    font-size: 18px; color: var(--ink); display: flex; align-items: center;
+    justify-content: center; border-radius: 50%; transition: transform 160ms;
+  }
+  .cart-drawer-close:hover { transform: rotate(90deg); }
+
+  .cart-section { margin-bottom: 22px; }
+  .cart-section-head {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--ink-soft); margin-bottom: 10px;
+    padding: 4px 10px; background: var(--paper-2); border: 2px solid var(--ink);
+    display: inline-block; transform: rotate(-1deg);
+  }
+  .cart-section-head.cut { background: var(--hot-pink); color: var(--paper); }
+  .cart-line {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 12px; background: var(--paper-2); border: 2px solid var(--ink);
+    margin-bottom: 8px; gap: 8px;
+  }
+  .cart-line .cl-title { flex: 1; font-family: var(--sub); font-size: 15px; line-height: 1.2; color: var(--ink); }
+  .cart-line .cl-cost { font-family: var(--mono); font-size: 12px; color: var(--ink-soft); white-space: nowrap; }
+  .cart-line .cl-remove {
+    background: none; border: none; color: var(--hot-pink);
+    font-family: var(--display); font-size: 18px; cursor: pointer; padding: 0 4px;
+  }
+  .cart-empty {
+    padding: 30px 0; font-family: var(--sans); font-size: 13.5px;
+    color: var(--ink-soft); text-align: center; font-style: italic;
+  }
+  .cart-budget-block {
+    background: var(--paper-2); border: 2px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink); padding: 16px 18px; margin-bottom: 22px;
+  }
+  .cart-budget-block label {
+    display: block; font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px;
+  }
+  .cart-budget-block .stat-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--sub); font-size: 22px; color: var(--ink);
+  }
+  .cart-budget-block .stat-row .over {
+    color: var(--hot-pink); font-size: 14px; font-family: var(--mono); letter-spacing: 0.08em;
+  }
+  .checkout-btn {
+    display: block; width: 100%; margin-top: 24px; padding: 18px;
+    background: var(--coral); color: var(--paper); border: 3px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink); font-family: var(--display); font-size: 22px;
+    cursor: pointer; text-align: center;
+    transition: transform 160ms, box-shadow 160ms;
+  }
+  .checkout-btn:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--ink); }
+  .checkout-btn:disabled {
+    background: var(--paper-2); color: var(--ink-soft); cursor: not-allowed;
+    border-color: var(--ink-soft); box-shadow: 3px 3px 0 var(--ink-soft);
+  }
+
+  .onboard-overlay {
+    position: fixed; inset: 0; background: rgba(24,24,26,0.78); z-index: 90;
+    display: none; align-items: center; justify-content: center; padding: 20px;
+  }
+  .onboard-overlay.open { display: flex; }
+  .onboard-box {
+    background: var(--paper); border: 4px solid var(--ink);
+    box-shadow: 12px 12px 0 var(--hot-pink); padding: 36px;
+    max-width: 480px; width: 100%; transform: rotate(-0.5deg);
+  }
+  .onboard-box h2 { font-family: var(--display); font-size: 38px; line-height: 0.95; color: var(--ink); margin-bottom: 8px; }
+  .onboard-box .lead { font-family: var(--sub); font-size: 15.5px; color: var(--ink-soft); margin-bottom: 22px; }
+  .onboard-field { margin-bottom: 18px; }
+  .onboard-field label {
+    display: block; font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); margin-bottom: 6px;
+  }
+  .onboard-field input, .onboard-field select {
+    width: 100%; padding: 10px 12px; font-family: var(--sub); font-size: 16px;
+    background: var(--paper-2); border: 2px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--ink); outline: none; color: var(--ink);
+  }
+  .onboard-field .hint {
+    font-family: var(--sans); font-size: 12px; color: var(--ink-soft);
+    margin-top: 4px; font-style: italic;
+  }
+  .onboard-actions { display: flex; gap: 10px; margin-top: 22px; }
+  .onboard-actions button {
+    flex: 1; padding: 12px; background: var(--coral); color: var(--paper);
+    border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+    font-family: var(--sub); font-size: 16px; cursor: pointer;
+    transition: transform 120ms, box-shadow 120ms;
+  }
+  .onboard-actions button:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+  .onboard-actions button.secondary { background: var(--paper-2); color: var(--ink); }
+
+  .pdf-output {
+    position: absolute; left: -99999px; top: 0; width: 794px;
+    background: white; padding: 0; font-family: Georgia, serif; color: #18181a;
+  }
+  .pdf-output.rendering {
+    left: 0; top: 0; z-index: 200;
+  }
 </style>
 </head>
 <body>
@@ -949,15 +1206,20 @@
     <span class="stamp coral">Pick 5. Stick 'em up.</span>
   </div>
 
-  <h1 class="title">
-    <span class="L1">100</span> <span class="L2">habits</span><br>
-    <span class="L3">to</span> <span class="L4">steal</span> <span class="L5">★</span>
-  </h1>
-
-  <p class="subline">A scrappy field guide to the actions that pay you back in energy, instead of draining you dry.</p>
-
-  <div class="what-is-cer">
-    <p><strong>CER</strong> stands for Compounding Energy Return. It asks one question. Does this hour, decision, or commitment pay back more usable energy than it costs? Four ledgers count. Body. Mind. Heart. Room.</p>
+  <div class="header-grid">
+    <div class="header-left">
+      <h1 class="title">
+        <span class="L1">100</span> <span class="L2">habits</span><br>
+        <span class="L3">to</span> <span class="L4">steal</span>
+      </h1>
+      <p class="subline">A scrappy field guide to the actions that pay you back in energy, instead of draining you dry.</p>
+    </div>
+    <div class="header-right">
+      <div class="what-is-cer">
+        <p><strong>CER.</strong> Compounding Energy Return. Does this hour pay back more usable energy than it costs? Four ledgers count. Body &amp; Energy. Mind &amp; Focus. Mood &amp; Peace. People &amp; Bonds.</p>
+        <p class="cer-organize"><strong>How it's organized.</strong> The Lifetime tab holds the master list. Decade tabs (20s through 60s) show the anchors that matter most for that stage. Inside each, items rank S, A, B, C by impact. <span class="cer-ncer">NCER</span> is the inverse. Habits that compound against you.</p>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -1209,15 +1471,13 @@
     <div class="anchor"><div class="anchor-tag">Anchor 07</div><div class="anchor-title">Build a wide friend group</div><div class="anchor-note">These people become the spine of the next forty years.</div></div>
   </div>
 
-  <div class="risks">
-    <div class="risks-head">NCER risks for this decade</div>
-    <ul class="risks-list">
-      <li>Treating health like it regenerates indefinitely</li>
-      <li>Sleep slides for work or social life</li>
-      <li>Debt accumulation as a default mode</li>
-      <li>Lifestyle creep tracking income</li>
-      <li>Choosing partners on chemistry alone</li>
-    </ul>
+  <span class="section-tag" style="background: var(--hot-pink); color: var(--paper);">NCER risks · this decade</span>
+  <div class="grid grid-NCER-A">
+    <article class="card ncer-card"><div class="num-badge">N20-1</div><div class="title">Treating health like it regenerates indefinitely</div></article>
+    <article class="card ncer-card"><div class="num-badge">N20-2</div><div class="title">Sleep slides for work or social life</div></article>
+    <article class="card ncer-card"><div class="num-badge">N20-3</div><div class="title">Debt accumulation as a default mode</div></article>
+    <article class="card ncer-card"><div class="num-badge">N20-4</div><div class="title">Lifestyle creep tracking income</div></article>
+    <article class="card ncer-card"><div class="num-badge">N20-5</div><div class="title">Choosing partners on chemistry alone</div></article>
   </div>
 </section>
 
@@ -1242,15 +1502,13 @@
     <div class="anchor"><div class="anchor-tag">Anchor 07</div><div class="anchor-title">Financial discipline</div><div class="anchor-note">Income rises, temptation rises. Lock savings as a percent, not a leftover.</div></div>
   </div>
 
-  <div class="risks">
-    <div class="risks-head">NCER risks for this decade</div>
-    <ul class="risks-list">
-      <li>Friendships erode under work and family load</li>
-      <li>Early signs of decline get ignored</li>
-      <li>Over-indexing on work at the cost of partnership</li>
-      <li>Sleep treated as negotiable</li>
-      <li>Stalling on purpose while waiting for certainty</li>
-    </ul>
+  <span class="section-tag" style="background: var(--hot-pink); color: var(--paper);">NCER risks · this decade</span>
+  <div class="grid grid-NCER-A">
+    <article class="card ncer-card"><div class="num-badge">N30-1</div><div class="title">Friendships erode under work and family load</div></article>
+    <article class="card ncer-card"><div class="num-badge">N30-2</div><div class="title">Early signs of decline get ignored</div></article>
+    <article class="card ncer-card"><div class="num-badge">N30-3</div><div class="title">Over-indexing on work at the cost of partnership</div></article>
+    <article class="card ncer-card"><div class="num-badge">N30-4</div><div class="title">Sleep treated as negotiable</div></article>
+    <article class="card ncer-card"><div class="num-badge">N30-5</div><div class="title">Stalling on purpose while waiting for certainty</div></article>
   </div>
 </section>
 
@@ -1276,15 +1534,13 @@
     <div class="anchor"><div class="anchor-tag">Anchor 08</div><div class="anchor-title">Mentor others</div><div class="anchor-note">Generativity feeds energy back. Teach what you know.</div></div>
   </div>
 
-  <div class="risks">
-    <div class="risks-head">NCER risks for this decade</div>
-    <ul class="risks-list">
-      <li>Midlife identity crisis driving rash moves</li>
-      <li>Body neglect masked by busyness</li>
-      <li>Financial decisions made under emotional weight</li>
-      <li>Coasting on past career capital</li>
-      <li>Marriage on auto-pilot</li>
-    </ul>
+  <span class="section-tag" style="background: var(--hot-pink); color: var(--paper);">NCER risks · this decade</span>
+  <div class="grid grid-NCER-A">
+    <article class="card ncer-card"><div class="num-badge">N40-1</div><div class="title">Midlife identity crisis driving rash moves</div></article>
+    <article class="card ncer-card"><div class="num-badge">N40-2</div><div class="title">Body neglect masked by busyness</div></article>
+    <article class="card ncer-card"><div class="num-badge">N40-3</div><div class="title">Financial decisions made under emotional weight</div></article>
+    <article class="card ncer-card"><div class="num-badge">N40-4</div><div class="title">Coasting on past career capital</div></article>
+    <article class="card ncer-card"><div class="num-badge">N40-5</div><div class="title">Marriage on auto-pilot</div></article>
   </div>
 </section>
 
@@ -1309,15 +1565,13 @@
     <div class="anchor"><div class="anchor-tag">Anchor 07</div><div class="anchor-title">Process midlife meaning</div><div class="anchor-note">Therapy, journaling, retreats. The interior work matters now.</div></div>
   </div>
 
-  <div class="risks">
-    <div class="risks-head">NCER risks for this decade</div>
-    <ul class="risks-list">
-      <li>Isolation after children leave or career peaks pass</li>
-      <li>Sedentary drift hidden by routine</li>
-      <li>Identity loss when an old role ends</li>
-      <li>Skipping health screenings</li>
-      <li>Coasting into a thin financial runway</li>
-    </ul>
+  <span class="section-tag" style="background: var(--hot-pink); color: var(--paper);">NCER risks · this decade</span>
+  <div class="grid grid-NCER-A">
+    <article class="card ncer-card"><div class="num-badge">N50-1</div><div class="title">Isolation after children leave or career peaks pass</div></article>
+    <article class="card ncer-card"><div class="num-badge">N50-2</div><div class="title">Sedentary drift hidden by routine</div></article>
+    <article class="card ncer-card"><div class="num-badge">N50-3</div><div class="title">Identity loss when an old role ends</div></article>
+    <article class="card ncer-card"><div class="num-badge">N50-4</div><div class="title">Skipping health screenings</div></article>
+    <article class="card ncer-card"><div class="num-badge">N50-5</div><div class="title">Coasting into a thin financial runway</div></article>
   </div>
 </section>
 
@@ -1342,15 +1596,13 @@
     <div class="anchor"><div class="anchor-tag">Anchor 07</div><div class="anchor-title">Legacy work</div><div class="anchor-note">Write the book. Tell the stories. Make what only you can make.</div></div>
   </div>
 
-  <div class="risks">
-    <div class="risks-head">NCER risks for this decade</div>
-    <ul class="risks-list">
-      <li>Sudden decline when maintenance lapses</li>
-      <li>Social withdrawal after retirement</li>
-      <li>Loss of structure once work ends</li>
-      <li>Postponing the legacy work indefinitely</li>
-      <li>Skipping medical screenings</li>
-    </ul>
+  <span class="section-tag" style="background: var(--hot-pink); color: var(--paper);">NCER risks · this decade</span>
+  <div class="grid grid-NCER-A">
+    <article class="card ncer-card"><div class="num-badge">N60-1</div><div class="title">Sudden decline when maintenance lapses</div></article>
+    <article class="card ncer-card"><div class="num-badge">N60-2</div><div class="title">Social withdrawal after retirement</div></article>
+    <article class="card ncer-card"><div class="num-badge">N60-3</div><div class="title">Loss of structure once work ends</div></article>
+    <article class="card ncer-card"><div class="num-badge">N60-4</div><div class="title">Postponing the legacy work indefinitely</div></article>
+    <article class="card ncer-card"><div class="num-badge">N60-5</div><div class="title">Skipping medical screenings</div></article>
   </div>
 </section>
 
@@ -1890,7 +2142,117 @@
       'N25': { t: 'Optimizing for a role you don\'t want',
         s: 'Job-domain misalignment is the largest single source of self-reported unhappiness in employed adults. <span class="src">Gallup engagement data, 20+ years; State of the Global Workplace reports.</span>',
         y: 'Steve Jobs in his Stanford 2005 commencement. "If today were the last day of my life, would I want to do what I am about to do?" Apply quarterly.',
-        e: 'Audit. Does this role match what you\'d choose if starting fresh? If no for 12+ months, plan an exit.' }
+        e: 'Audit. Does this role match what you\'d choose if starting fresh? If no for 12+ months, plan an exit.' },
+
+      // ===== DECADE-SPECIFIC NCER (20s) =====
+      'N20-1': { t: 'Treating health like it regenerates indefinitely',
+        s: 'Bone mass peaks around age 25 to 30 and declines from there. Habits set before 30 shape the body\'s reserves for the next 50 years. <span class="src">Hernandez et al., Osteoporos Int, 2003. Bone mineral density research.</span>',
+        y: 'Peter Attia frames the 20s as the decade of "biological investing." What you bank now compounds. Andrew Huberman has spoken publicly about the sleep abuse of his 20s and the years it cost him later.',
+        e: 'Treat health like compound interest. Daily deposit, no borrowing. Sleep, strength, food are non-negotiable, not lifestyle choices.' },
+      'N20-2': { t: 'Sleep slides for work or social life',
+        s: '~70% of US adults aged 18 to 25 report less than 7 hours of sleep on weeknights. The damage accumulates invisibly. <span class="src">CDC sleep duration data; BRFSS surveys.</span>',
+        y: 'Most peak performers in their 40s+ (athletes, founders, surgeons) describe sleep as the habit they wish they had anchored at 22. The lesson usually arrives late.',
+        e: 'Anchor 7+ hours nightly even when friends keep going. Leave at midnight. The bar does not compound. Sleep does.' },
+      'N20-3': { t: 'Debt accumulation as a default mode',
+        s: 'US student loan debt averages ~$38k per borrower. Compounding at 6 to 8% APR over decades, the borrow-first mindset of the 20s shapes the 30s and 40s. <span class="src">Federal Reserve consumer debt data; Department of Education data.</span>',
+        y: 'Mr. Money Mustache (Peter Adeney) retired at 30 by treating consumer debt as an emergency. Most peers in their 20s treat debt as normal financial life.',
+        e: 'Aggressive paydown before any luxury. No new debt for lifestyle. Live below your starting income, even if it feels tight.' },
+      'N20-4': { t: 'Lifestyle creep tracking income',
+        s: 'The "hedonic treadmill" effect. Happiness gains from spending fade fast and raise baseline expectations. <span class="src">Brickman et al., 1971. Lyubomirsky refinement work.</span>',
+        y: 'Stanley and Danko\'s The Millionaire Next Door (1996) documented that most US millionaires live below their means. The peer-flex pattern of the 20s is the opposite of wealth.',
+        e: 'Cap each lifestyle item as a percent of income, not a dollar amount. New income redirects to savings before spending.' },
+      'N20-5': { t: 'Choosing partners on chemistry alone',
+        s: 'Marriages with high initial chemistry but low value alignment show higher long-term divorce rates. Values, friendship, and conflict-handling predict longevity, not attraction alone. <span class="src">Gottman research on relationship predictors; UC Berkeley relationship science.</span>',
+        y: 'John Gottman\'s 30+ years of couples research consistently finds the 20s pattern of "chemistry-first" relationships predicts later instability vs values-aligned matches.',
+        e: 'Date with explicit attention to values, money habits, conflict style, family dynamics. Chemistry plus substance, not chemistry alone.' },
+
+      // ===== DECADE-SPECIFIC NCER (30s) =====
+      'N30-1': { t: 'Friendships erode under work and family load',
+        s: 'Adult friendships peak around age 25 and decline steadily, with sharpest drops after marriage and children. <span class="src">Demir, Journal of Happiness Studies, 2010. Surgeon General loneliness advisory, 2023.</span>',
+        y: 'The "friendship recession" was widely documented post-2020. Many 30-somethings realize too late that they outsourced friendship maintenance to spouses or coworkers.',
+        e: 'Calendar friendships explicitly. Monthly call, quarterly visit, annual trip. Initiate. Show up.' },
+      'N30-2': { t: 'Early signs of decline get ignored',
+        s: 'Muscle mass loss begins in the 30s at 0.5 to 1% per year. VO2 max declines 1% per year after 30 without active training. <span class="src">Phillips et al., McMaster, sarcopenia research; cardiopulmonary aging literature.</span>',
+        y: 'Peter Attia\'s Outlive (2023) frames the 30s as "the decade of decisions" - what you do or don\'t do here echoes for 40 years.',
+        e: 'Annual blood panel. Strength training 3x weekly. Mobility work daily. The decline starts now, not later.' },
+      'N30-3': { t: 'Over-indexing on work at cost of partnership',
+        s: 'Work-family conflict in the 30s predicts both divorce risk and burnout. The conflict is structural, not personal. <span class="src">Greenhaus and Beutell, Academy of Management Review, 1985.</span>',
+        y: 'Esther Perel\'s decades of work with long-term couples consistently shows the 30s as the highest-risk decade for relational drift, especially in dual-career households with young children.',
+        e: 'Weekly date night non-negotiable. Quarterly partner retreat. Cut work events that conflict with anchor partner time.' },
+      'N30-4': { t: 'Sleep treated as negotiable',
+        s: 'Parents of young children lose an estimated 6 years of sleep across the first decade of parenthood. <span class="src">Parental sleep research; Owl Labs and parental sleep tracking data.</span>',
+        y: 'Matthew Walker has spoken specifically about parents of young kids being one of the most chronically sleep-deprived groups in society, and the cognitive cost being widely underestimated.',
+        e: 'Both parents share night duty. Nap when the baby naps. Sleep is a two-person responsibility, not a one-person sacrifice.' },
+      'N30-5': { t: 'Stalling on purpose while waiting for certainty',
+        s: 'Decision delay correlates with worse mental health outcomes than even a "wrong" decision pursued with conviction. <span class="src">Decision research; positive psychology on autonomy and action.</span>',
+        y: 'Many 30-somethings describe their late-30s pivot as one they should have made 5 years earlier. The cost of indecision compounds quietly.',
+        e: 'Commit to a thread for 12 months. If still flat at the end, pivot. Don\'t stay in "exploring" indefinitely.' },
+
+      // ===== DECADE-SPECIFIC NCER (40s) =====
+      'N40-1': { t: 'Midlife identity crisis driving rash moves',
+        s: '"Gray divorce" (50+ divorce rate) doubled between 1990 and 2010 in the US. Many late-40s ruptures are driven by identity reconfiguration, not unaddressed problems. <span class="src">Brown and Lin, Pew Research, gray divorce data.</span>',
+        y: 'Therapists working in midlife (e.g., James Hollis, Jungian analyst) distinguish between necessary reinvention and panicked rupture. The latter usually backfires within 5 years.',
+        e: 'No irreversible decisions (divorce, quitting, moving country) within 6 months of strong midlife emotion. Sit with it. Therapy first.' },
+      'N40-2': { t: 'Body neglect masked by busyness',
+        s: 'Visceral fat accumulation in the 40s correlates with type 2 diabetes risk decades later. Body composition shift is silent, weight scales miss it. <span class="src">Despres et al., Circulation, body composition and metabolic risk.</span>',
+        y: 'Peter Attia. "The cost of inaction in the 40s is the most expensive single decision people make about their bodies." Outlive (2023) is built on this premise.',
+        e: 'Strength training 3x weekly non-negotiable. Annual DEXA scan. Track body composition, not just weight.' },
+      'N40-3': { t: 'Financial decisions made under emotional weight',
+        s: 'Major life events (divorce, career change, parent loss) correlate with measurably poorer financial decisions in the following 12 to 24 months. <span class="src">Behavioral finance literature; Kahneman and Tversky framing research.</span>',
+        y: 'Behavioral finance research consistently shows emotionally-loaded decisions underperform structured ones. "Quit and start a business" mid-divorce is a common, costly pattern.',
+        e: 'Big financial moves only after 90+ days of emotional cooling. Get a fee-only advisor. Avoid impulse career pivots.' },
+      'N40-4': { t: 'Coasting on past career capital',
+        s: 'Skill half-life in many domains has compressed to ~5 years. Coasting on decade-old expertise compounds into obsolescence by 50. <span class="src">IBM Institute for Business Value skills research; learning and development literature.</span>',
+        y: 'Many mid-career professionals describe feeling stuck at 50 because they stopped learning at 40. The pattern is preventable but invisible to the coaster.',
+        e: 'One new skill per year, ideally a new domain entirely. Take a course. Get coached. Refresh deliberately.' },
+      'N40-5': { t: 'Marriage on auto-pilot',
+        s: 'The "U-curve" of marital satisfaction - couples in their 40s report some of the lowest satisfaction scores of any decade in large longitudinal datasets. <span class="src">Glenn, J Marriage Fam, marital satisfaction longitudinal data.</span>',
+        y: 'John Gottman. "Most marriages don\'t end in conflict, they end in slow distance." The 40s are where the distance gets normalized into routine.',
+        e: 'Weekly 1-hour dedicated partner time, no kids, no phones. Annual partnership retreat. Repair small things fast.' },
+
+      // ===== DECADE-SPECIFIC NCER (50s) =====
+      'N50-1': { t: 'Isolation after children leave or career peaks pass',
+        s: 'Social network size shrinks meaningfully in the 50s. Mid-life isolation predicts dementia risk decades later. <span class="src">Holt-Lunstad social isolation meta-analyses; Lancet Commission on dementia prevention, 2020.</span>',
+        y: 'Many 50-somethings describe an empty calendar after children leave as a shock they didn\'t prepare for. Social infrastructure takes years to build, not weeks.',
+        e: 'Build hobbies with social anchors before role transitions. Recurring events. Groups. Don\'t wait for the empty calendar to start.' },
+      'N50-2': { t: 'Sedentary drift hidden by routine',
+        s: 'Average daily activity drops measurably from the 40s to the 50s, often without the person noticing because routine activities feel similar. <span class="src">Wearable cohort data (Fitbit, Garmin); accelerometer studies.</span>',
+        y: 'Wearable data consistently shows an age curve where total daily movement quietly drops decade by decade unless explicitly defended.',
+        e: 'Track steps. Sit alarm every 30 min. Walking meetings. Make movement structural, not optional.' },
+      'N50-3': { t: 'Identity loss when an old role ends',
+        s: 'Role identity transitions (parent → empty nester, employee → retiree) are among the most reliable predictors of mid-life depression. <span class="src">Role transition and identity research; retirement adjustment literature.</span>',
+        y: 'Many high performers describe post-role transitions (CEO to retiree especially) as more disorienting than they expected. The role was carrying more of the identity load than they credited.',
+        e: 'Begin developing new identity 5+ years before role end. Hobby, volunteer work, second career. Multiple identity load-bearers.' },
+      'N50-4': { t: 'Skipping health screenings',
+        s: 'Most preventable cancers in the 50s+ show up on routine screenings 5 to 10 years before symptoms. <span class="src">USPSTF screening guidelines; oncology early detection research.</span>',
+        y: 'Stories of preventable deaths from skipped screenings populate oncology literature. Steve Jobs publicly regretted delaying conventional pancreatic cancer treatment in 2003.',
+        e: 'Annual physical with full labs. Colonoscopy at 45. Mammogram or prostate screening per guidelines. Skin cancer dermatology yearly.' },
+      'N50-5': { t: 'Coasting into a thin financial runway',
+        s: '~50% of US adults aged 55 to 64 have no retirement savings beyond Social Security. <span class="src">Federal Reserve Survey of Consumer Finances, 2022.</span>',
+        y: 'Personal finance writers consistently flag the 50s as the "last chance to compound" decade. The 60s are too late for capital to do most of the work.',
+        e: 'Run actual retirement numbers. Fee-only advisor. Catch-up contributions allowed at 50+. Aggressive saving for 10 years.' },
+
+      // ===== DECADE-SPECIFIC NCER (60s) =====
+      'N60-1': { t: 'Sudden decline when maintenance lapses',
+        s: 'Falls are the leading cause of injury death in adults 65+. A single bad fall can trigger years of reduced capacity. <span class="src">CDC older adult fall data; geriatric medicine literature.</span>',
+        y: 'Geriatricians like Lou Aronne and others emphasize that the 60s are when maintenance failures become non-linear. Small lapses produce big consequences fast.',
+        e: 'Daily mobility, strength, and balance practice. Annual checkups. Don\'t skip the small inputs.' },
+      'N60-2': { t: 'Social withdrawal after retirement',
+        s: 'Retirement-onset isolation predicts cognitive decline. Isolated retirees show ~30%+ higher dementia risk vs socially engaged peers. <span class="src">Lancet Commission on Dementia Prevention, 2020; Holt-Lunstad isolation research.</span>',
+        y: 'Robert Waldinger (Harvard Adult Development Study) emphasizes social engagement as the single strongest predictor of late-life health and happiness across 85+ years of data.',
+        e: 'Recurring social commitments. Volunteer work. Community group. Don\'t outsource social to spouse only.' },
+      'N60-3': { t: 'Loss of structure once work ends',
+        s: 'Unstructured retirement correlates with worse mental health and faster cognitive decline. The structure of work was carrying more weight than expected. <span class="src">Retirement adjustment literature; positive psychology on routine and meaning.</span>',
+        y: 'Many high-performing retirees report needing 1 to 2 years to rebuild structure they hadn\'t realized they relied on. The transition is harder than the goodbye.',
+        e: 'Build a daily schedule for retirement before retiring. Morning routine, projects, social, exercise, reflection. Structure stays, content changes.' },
+      'N60-4': { t: 'Postponing the legacy work indefinitely',
+        s: 'Generativity (passing on knowledge, mentoring, contributing to the next generation) is associated with lower depression and higher life satisfaction in older adults. <span class="src">Erik Erikson, stages of psychosocial development; positive psychology research.</span>',
+        y: 'Erikson\'s framework identifies generativity vs stagnation as the central late-midlife task. Those who skip the legacy work stagnate measurably.',
+        e: 'Pick one legacy project per year. Memoir, book, mentoring program, foundation. Start now, finish in the doing.' },
+      'N60-5': { t: 'Skipping medical screenings',
+        s: '65+ adults who follow recommended screening schedules show measurably better outcomes across cancer, cardiovascular, and cognitive health. <span class="src">USPSTF guidelines; geriatric medicine longitudinal data.</span>',
+        y: 'Geriatric medicine has documented the cumulative effect of skipped screenings. By 70, the unscreened cohort shows clearly worse mortality and morbidity vs the screened.',
+        e: 'Annual physical with full labs. Cancer screenings per guidelines. Hearing and vision yearly. Dementia screening if family history.' }
     };
 
     // ========= TABS / VIEW =========
@@ -1999,5 +2361,583 @@
   })();
 </script>
 
+
+<!-- ============= SHOPPING CART UI ============= -->
+<div class="cart-bar" id="cartBar" role="region" aria-label="Plan summary">
+  <div class="cart-bar-count" id="cartBarCount">0</div>
+  <div class="cart-bar-fill-wrap">
+    <div class="cart-bar-fill-row">
+      <span id="cartBarLabel">Add a habit to start your plan</span>
+      <span id="cartBarOver" class="cart-bar-over"></span>
+    </div>
+    <div class="cart-bar-fill">
+      <div class="cart-bar-fill-inner" id="cartBarFill" style="width: 0%"></div>
+      <div class="cart-bar-fill-overflow" id="cartBarOverflow" style="width: 0%"></div>
+    </div>
+  </div>
+  <button class="cart-bar-btn" id="cartBarOpen">Plan</button>
+  <button class="cart-bar-btn primary" id="cartBarCheckout">Generate PDF</button>
+</div>
+
+<div class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Your plan">
+  <div class="cart-drawer-inner">
+    <div class="cart-drawer-head">
+      <div>
+        <h2>Your Plan</h2>
+        <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; color: var(--ink-soft); margin-top: 6px;" id="drawerSubhead">No items yet</div>
+      </div>
+      <button class="cart-drawer-close" id="cartDrawerClose" aria-label="close">×</button>
+    </div>
+    <div class="cart-budget-block">
+      <label>Daily Budget</label>
+      <div class="stat-row">
+        <span><span id="drawerTotal">0</span> / <span id="drawerBudget">0</span> min/day</span>
+        <span class="over" id="drawerOver"></span>
+      </div>
+      <div style="margin-top: 10px;">
+        <button id="drawerEditBudget" style="background: none; border: none; font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--coral); cursor: pointer; padding: 0; text-decoration: underline;">edit budget / age / phase</button>
+      </div>
+    </div>
+    <div class="cart-section">
+      <div class="cart-section-head">Stack · habits to adopt</div>
+      <div id="stackList"><div class="cart-empty">Nothing here yet. Click cards in the catalog to add.</div></div>
+    </div>
+    <div class="cart-section">
+      <div class="cart-section-head cut">Cut · habits to quit</div>
+      <div id="cutList"><div class="cart-empty">Nothing here yet. Add NCER cards to commit to cutting.</div></div>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn">Generate Plan PDF</button>
+  </div>
+</div>
+
+<div class="onboard-overlay" id="onboardOverlay">
+  <div class="onboard-box">
+    <h2>Set your plan</h2>
+    <p class="lead">Three quick inputs. Everything else flows from here.</p>
+    <div class="onboard-field">
+      <label>Daily Minutes Available</label>
+      <input type="number" id="inputMinutes" min="5" max="600" step="5" value="60" />
+      <div class="hint">How many minutes per day, averaged across a week, for building habits?</div>
+    </div>
+    <div class="onboard-field">
+      <label>Age Bracket</label>
+      <select id="inputAge">
+        <option value="">Pick one</option>
+        <option value="20s">20s</option>
+        <option value="30s">30s</option>
+        <option value="40s">40s</option>
+        <option value="50s">50s</option>
+        <option value="60s">60s</option>
+      </select>
+      <div class="hint">Used only for decade-specific habit context.</div>
+    </div>
+    <div class="onboard-field">
+      <label>Habits Per Phase</label>
+      <select id="inputPhaseSize">
+        <option value="1">1 — slow and safe</option>
+        <option value="2" selected>2 — balanced (recommended)</option>
+        <option value="3">3 — aggressive</option>
+      </select>
+      <div class="hint">How many habits to add per 60-day phase.</div>
+    </div>
+    <div class="onboard-actions">
+      <button class="secondary" id="onboardSkip">Skip for now</button>
+      <button id="onboardSave">Save and continue</button>
+    </div>
+  </div>
+</div>
+
+<div class="pdf-output" id="pdfOutput"></div>
+
+<script>
+/* ============================================================
+   CER SHOPPING CART LOGIC
+   ============================================================ */
+(function () {
+  // -------- COST DATA (minutes/day for each habit) --------
+  const costs = {
+    '01': 5, '02': 30, '03': 15, '04': 30, '05': 10,
+    '06': 5, '07': 60, '08': 5, '09': 30, '10': 15,
+    '11': 90, '12': 10, '13': 30, '14': 15, '15': 10,
+    '16': 15, '17': 60, '18': 20, '19': 30, '20': 5,
+    '21': 5, '22': 5, '23': 5, '24': 5, '25': 30,
+    '26': 20, '27': 30, '28': 15, '29': 5, '30': 10,
+    '31': 5, '32': 5, '33': 5, '34': 30, '35': 15,
+    '36': 5, '37': 10, '38': 10, '39': 5, '40': 15,
+    '41': 10, '42': 20, '43': 10, '44': 10, '45': 5,
+    '46': 5, '47': 5, '48': 5, '49': 15, '50': 15,
+    '51': 30, '52': 30, '53': 5, '54': 5, '55': 5,
+    '56': 5, '57': 5, '58': 5, '59': 30, '60': 30,
+    '61': 5, '62': 5, '63': 5, '64': 10, '65': 5,
+    '66': 5, '67': 5, '68': 5, '69': 10, '70': 10,
+    '71': 5, '72': 5, '73': 5, '74': 5, '75': 5,
+    '76': 15, '77': 5, '78': 15, '79': 10, '80': 5,
+    '81': 5, '82': 5, '83': 5, '84': 5, '85': 5,
+    '86': 5, '87': 5, '88': 5, '89': 5, '90': 5,
+    '91': 30, '92': 10, '93': 30, '94': 15, '95': 5,
+    '96': 15, '97': 10, '98': 5, '99': 5, '100': 15,
+    'N1': 5, 'N2': 30, 'N3': 20, 'N4': 30, 'N5': 15,
+    'N6': 10, 'N7': 20, 'N8': 15, 'N9': 10, 'N10': 5,
+    'N11': 15, 'N12': 20, 'N13': 15, 'N14': 5, 'N15': 10,
+    'N16': 5, 'N17': 10, 'N18': 15, 'N19': 10, 'N20': 5,
+    'N21': 5, 'N22': 5, 'N23': 5, 'N24': 5, 'N25': 10,
+    'N20-1': 5, 'N20-2': 5, 'N20-3': 10, 'N20-4': 5, 'N20-5': 10,
+    'N30-1': 10, 'N30-2': 5, 'N30-3': 15, 'N30-4': 10, 'N30-5': 5,
+    'N40-1': 10, 'N40-2': 5, 'N40-3': 5, 'N40-4': 15, 'N40-5': 15,
+    'N50-1': 15, 'N50-2': 5, 'N50-3': 10, 'N50-4': 5, 'N50-5': 5,
+    'N60-1': 10, 'N60-2': 10, 'N60-3': 10, 'N60-4': 15, 'N60-5': 5
+  };
+
+  function tierOf(num) {
+    if (num.charAt(0) === 'N') return 'NCER';
+    const n = parseInt(num, 10);
+    if (n <= 10) return 'S';
+    if (n <= 30) return 'A';
+    if (n <= 60) return 'B';
+    return 'C';
+  }
+
+  // 8 strong pairs — non-canonical maps to canonical
+  const canonicalReplacement = {
+    'N1':  { canon: '01',  reason: 'Sleep 7 to 9 hours (Stack)' },
+    '41':  { canon: 'N6',  reason: 'Heavy alcohol (Cut)' },
+    '42':  { canon: 'N7',  reason: 'Smoking or vaping (Cut)' },
+    '40':  { canon: 'N11', reason: 'Ultra-processed food (Cut)' },
+    'N10': { canon: '46',  reason: 'Saying difficult truths early (Stack)' },
+    '29':  { canon: 'N16', reason: 'Saying yes to everything (Cut)' },
+    'N19': { canon: '15',  reason: 'Keep old friendships alive (Stack)' },
+    '33':  { canon: 'N18', reason: 'Living beyond means (Cut)' }
+  };
+
+  const STORAGE_KEY = 'cer_cart_v1';
+  const state = {
+    items: [],
+    budget: 0,
+    age: '',
+    phaseSize: 2,
+    onboarded: false
+  };
+
+  function saveState() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) Object.assign(state, JSON.parse(raw));
+    } catch (e) {}
+  }
+  loadState();
+
+  function isNcer(num) { return num.charAt(0) === 'N'; }
+
+  function totalCost() {
+    return state.items.reduce(function (sum, num) { return sum + (costs[num] || 0); }, 0);
+  }
+
+  function decorateCards() {
+    document.querySelectorAll('.card').forEach(function (card) {
+      const numEl = card.querySelector('.num-badge');
+      if (!numEl) return;
+      const num = numEl.textContent.trim();
+      const cost = costs[num];
+      if (cost === undefined) return;
+      if (!card.querySelector('.price-pill')) {
+        const pill = document.createElement('span');
+        pill.className = 'price-pill';
+        pill.textContent = '⏱ ' + cost + 'm';
+        card.appendChild(pill);
+      }
+      if (!card.querySelector('.add-btn')) {
+        const btn = document.createElement('button');
+        btn.className = 'add-btn';
+        btn.dataset.cardNum = num;
+        btn.type = 'button';
+        const canon = canonicalReplacement[num];
+        if (canon) {
+          btn.classList.add('disabled');
+          btn.textContent = '✦ Covered by ' + canon.reason;
+          btn.disabled = true;
+        } else {
+          btn.textContent = card.classList.contains('ncer-card') ? '✗ Add to Cut' : '+ Add to Stack';
+        }
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (btn.disabled) return;
+          toggleCartItem(num);
+        });
+        card.appendChild(btn);
+      }
+    });
+    refreshCardStates();
+  }
+
+  function refreshCardStates() {
+    document.querySelectorAll('.card .add-btn').forEach(function (btn) {
+      const num = btn.dataset.cardNum;
+      if (!num || btn.classList.contains('disabled')) return;
+      const inCart = state.items.indexOf(num) > -1;
+      btn.classList.toggle('added', inCart);
+      const isN = btn.closest('.ncer-card') !== null;
+      btn.textContent = inCart
+        ? '✓ Added (' + (costs[num] || 0) + 'm)'
+        : (isN ? '✗ Add to Cut' : '+ Add to Stack');
+    });
+    refreshModalAddBtn();
+  }
+
+  function toggleCartItem(num) {
+    const idx = state.items.indexOf(num);
+    if (idx > -1) {
+      state.items.splice(idx, 1);
+    } else {
+      state.items.push(num);
+      if (!state.onboarded) openOnboard();
+    }
+    saveState();
+    refreshCardStates();
+    renderCart();
+  }
+
+  const cartBar = document.getElementById('cartBar');
+  const cartBarCount = document.getElementById('cartBarCount');
+  const cartBarLabel = document.getElementById('cartBarLabel');
+  const cartBarOver = document.getElementById('cartBarOver');
+  const cartBarFill = document.getElementById('cartBarFill');
+  const cartBarOverflow = document.getElementById('cartBarOverflow');
+  const cartBarOpen = document.getElementById('cartBarOpen');
+  const cartBarCheckout = document.getElementById('cartBarCheckout');
+  const cartDrawer = document.getElementById('cartDrawer');
+  const cartDrawerClose = document.getElementById('cartDrawerClose');
+  const stackList = document.getElementById('stackList');
+  const cutList = document.getElementById('cutList');
+  const drawerTotal = document.getElementById('drawerTotal');
+  const drawerBudget = document.getElementById('drawerBudget');
+  const drawerOver = document.getElementById('drawerOver');
+  const drawerSubhead = document.getElementById('drawerSubhead');
+  const drawerEditBudget = document.getElementById('drawerEditBudget');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+
+  function getCardTitle(num) {
+    const cards = document.querySelectorAll('.card');
+    for (let i = 0; i < cards.length; i++) {
+      const badge = cards[i].querySelector('.num-badge');
+      if (badge && badge.textContent.trim() === num) {
+        const titleEl = cards[i].querySelector('.title');
+        if (titleEl) return titleEl.textContent.trim();
+      }
+    }
+    return num;
+  }
+
+  function renderList(container, nums, emptyMsg) {
+    if (nums.length === 0) {
+      container.innerHTML = '<div class="cart-empty">' + emptyMsg + '</div>';
+      return;
+    }
+    container.innerHTML = '';
+    nums.forEach(function (num) {
+      const title = getCardTitle(num);
+      const line = document.createElement('div');
+      line.className = 'cart-line';
+      line.innerHTML = '<span class="cl-title">' + title + '</span><span class="cl-cost">⏱ ' + (costs[num] || 0) + 'm</span><button class="cl-remove" aria-label="remove">×</button>';
+      line.querySelector('.cl-remove').addEventListener('click', function () { toggleCartItem(num); });
+      container.appendChild(line);
+    });
+  }
+
+  function renderCart() {
+    const total = totalCost();
+    const count = state.items.length;
+    const budget = state.budget || 0;
+    const over = budget > 0 ? Math.max(0, total - budget) : 0;
+    if (count > 0) {
+      cartBar.classList.add('visible');
+      document.body.classList.add('has-cart');
+    } else {
+      cartBar.classList.remove('visible');
+      document.body.classList.remove('has-cart');
+    }
+    cartBarCount.textContent = count;
+    cartBarLabel.textContent = budget > 0
+      ? total + ' of ' + budget + ' min/day'
+      : count + ' habit' + (count !== 1 ? 's' : '') + ' · set your budget';
+    cartBarOver.textContent = over > 0 ? 'OVER BUDGET' : '';
+    if (budget > 0) {
+      const pct = Math.min(100, (total / budget) * 100);
+      cartBarFill.style.width = pct + '%';
+      const overPct = total > budget ? Math.min(100, ((total - budget) / budget) * 100) : 0;
+      cartBarOverflow.style.width = overPct + '%';
+    } else {
+      cartBarFill.style.width = '0%';
+      cartBarOverflow.style.width = '0%';
+    }
+    drawerTotal.textContent = total;
+    drawerBudget.textContent = budget || '—';
+    drawerOver.textContent = over > 0 ? 'OVER by ' + over + 'm' : '';
+    drawerSubhead.textContent = count + ' habit' + (count !== 1 ? 's' : '') + ' selected';
+    renderList(stackList, state.items.filter(function (n) { return !isNcer(n); }), 'Nothing here yet. Click + Add to Stack on any card.');
+    renderList(cutList,   state.items.filter(function (n) { return  isNcer(n); }), 'Nothing here yet. Add NCER cards to commit to cutting.');
+    checkoutBtn.disabled = count === 0;
+  }
+
+  function openDrawer() { cartDrawer.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeDrawer() { cartDrawer.classList.remove('open'); document.body.style.overflow = ''; }
+  cartBarOpen.addEventListener('click', openDrawer);
+  cartDrawerClose.addEventListener('click', closeDrawer);
+  cartBarCheckout.addEventListener('click', function () {
+    if (!state.budget || !state.age) { openOnboard(); return; }
+    generatePDF();
+  });
+  checkoutBtn.addEventListener('click', function () {
+    if (!state.budget || !state.age) { openOnboard(); return; }
+    closeDrawer(); generatePDF();
+  });
+
+  const onboardOverlay = document.getElementById('onboardOverlay');
+  const inputMinutes = document.getElementById('inputMinutes');
+  const inputAge = document.getElementById('inputAge');
+  const inputPhaseSize = document.getElementById('inputPhaseSize');
+  const onboardSave = document.getElementById('onboardSave');
+  const onboardSkip = document.getElementById('onboardSkip');
+
+  function openOnboard() {
+    if (state.budget) inputMinutes.value = state.budget;
+    if (state.age) inputAge.value = state.age;
+    if (state.phaseSize) inputPhaseSize.value = state.phaseSize;
+    onboardOverlay.classList.add('open');
+  }
+  function closeOnboard() { onboardOverlay.classList.remove('open'); }
+  onboardSkip.addEventListener('click', closeOnboard);
+  onboardSave.addEventListener('click', function () {
+    const m = parseInt(inputMinutes.value, 10);
+    const a = inputAge.value;
+    const p = parseInt(inputPhaseSize.value, 10);
+    if (!m || m < 5) { alert('Set at least 5 minutes daily.'); return; }
+    state.budget = Math.round(m / 5) * 5;
+    state.age = a;
+    state.phaseSize = p || 2;
+    state.onboarded = true;
+    saveState();
+    renderCart();
+    closeOnboard();
+  });
+  drawerEditBudget.addEventListener('click', openOnboard);
+
+  function refreshModalAddBtn() {
+    const modalBox = document.getElementById('modalBox');
+    if (!modalBox) return;
+    let btn = modalBox.querySelector('.modal-add-btn');
+    const modalNumEl = document.getElementById('modalNum');
+    if (!modalNumEl) return;
+    const raw = modalNumEl.textContent.trim();
+    let num = '';
+    if (raw.indexOf('NCER · ') === 0) num = raw.slice(7);
+    else if (raw.indexOf('No. ') === 0) num = raw.slice(4);
+    if (!num) return;
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.className = 'modal-add-btn';
+      btn.type = 'button';
+      btn.addEventListener('click', function () {
+        if (btn.classList.contains('disabled')) return;
+        const n = btn.dataset.cardNum;
+        if (n) toggleCartItem(n);
+      });
+      modalBox.appendChild(btn);
+    }
+    btn.dataset.cardNum = num;
+    const canon = canonicalReplacement[num];
+    if (canon) {
+      btn.classList.add('disabled'); btn.classList.remove('added');
+      btn.textContent = '✦ Covered by ' + canon.reason;
+      btn.disabled = true; return;
+    }
+    btn.classList.remove('disabled'); btn.disabled = false;
+    const inCart = state.items.indexOf(num) > -1;
+    btn.classList.toggle('added', inCart);
+    const isN = num.charAt(0) === 'N';
+    btn.textContent = inCart
+      ? '✓ Added to Plan (' + (costs[num] || 0) + 'm)'
+      : (isN ? '✗ Commit to Cut · ' + (costs[num] || 0) + 'm' : '+ Add to Plan · ' + (costs[num] || 0) + 'm');
+  }
+
+  const modalOverlay = document.getElementById('modalOverlay');
+  if (modalOverlay) {
+    const obs = new MutationObserver(function () {
+      if (modalOverlay.classList.contains('open')) setTimeout(refreshModalAddBtn, 50);
+    });
+    obs.observe(modalOverlay, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  function buildPhases() {
+    const stack = state.items.filter(function (n) { return !isNcer(n); });
+    const cut   = state.items.filter(function (n) { return  isNcer(n); });
+    const tierRank = { 'S': 1, 'A': 2, 'B': 3, 'C': 4 };
+    function rankCer(n) { return tierRank[tierOf(n)] || 5; }
+    function rankNcer(n) {
+      if (n.indexOf('-') === -1) {
+        const idx = parseInt(n.slice(1), 10);
+        return idx <= 10 ? 1 : 2;
+      }
+      return 3;
+    }
+    stack.sort(function (a, b) { return rankCer(a) - rankCer(b); });
+    cut.sort(function (a, b) { return rankNcer(a) - rankNcer(b); });
+    const combined = [];
+    const maxLen = Math.max(stack.length, cut.length);
+    for (let i = 0; i < maxLen; i++) {
+      if (i < stack.length) combined.push(stack[i]);
+      if (i < cut.length) combined.push(cut[i]);
+    }
+    const ps = state.phaseSize || 2;
+    const phases = [];
+    for (let i = 0; i < combined.length; i += ps) phases.push(combined.slice(i, i + ps));
+    return phases;
+  }
+
+  function tierLabel(num) { return isNcer(num) ? 'NCER' : 'CER ' + tierOf(num); }
+
+  function generatePDF() {
+    if (!state.budget || !state.age) { openOnboard(); return; }
+    const total = totalCost();
+    const over = Math.max(0, total - state.budget);
+    const phases = buildPhases();
+    const pct = Math.min(100, (total / state.budget) * 100);
+    const overPct = total > state.budget ? Math.min(100, ((total - state.budget) / state.budget) * 100) : 0;
+    const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+    let html = '<div style="font-family: Georgia, serif; color: #18181a; padding: 20px;">';
+    html += '<div style="border-bottom: 3px solid #18181a; padding-bottom: 16px; margin-bottom: 24px;">';
+    html += '<div style="font-family: Courier, monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8c3a1f;">Your CER Plan · ' + dateStr + '</div>';
+    html += '<h1 style="font-size: 36px; line-height: 1.05; margin: 8px 0 4px; color: #18181a;">' + state.items.length + ' Commitments · ' + total + ' min/day</h1>';
+    html += '<div style="font-size: 13px; color: #4a4a52;">Age bracket ' + state.age + ' · ' + state.phaseSize + ' habits per phase · ' + state.budget + ' min/day budget</div>';
+    html += '</div>';
+
+    html += '<div style="margin-bottom: 24px;">';
+    html += '<div style="font-family: Courier, monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; color: #4a4a52;">Feasibility</div>';
+    html += '<div style="position: relative; height: 26px; background: #efe5cd; border: 2px solid #18181a;">';
+    html += '<div style="position: absolute; left: 0; top: 0; bottom: 0; width: ' + pct + '%; background: linear-gradient(90deg, #1fc4a8, #ff5b4f);"></div>';
+    html += '<div style="position: absolute; right: 0; top: 0; bottom: 0; width: ' + overPct + '%; background: repeating-linear-gradient(45deg, #ff3d8a 0 6px, #c0246a 6px 12px);"></div>';
+    html += '</div>';
+    html += '<div style="display: flex; justify-content: space-between; font-family: Courier, monospace; font-size: 11px; margin-top: 6px;">';
+    html += '<span>' + total + ' of ' + state.budget + ' min/day (' + Math.round(pct) + '%)</span>';
+    html += '<span style="color: ' + (over > 0 ? '#ff3d8a' : '#4a5d3a') + '; font-weight: 700;">' + (over > 0 ? 'OVER BUDGET' : 'WITHIN BUDGET') + '</span>';
+    html += '</div></div>';
+
+    html += '<div style="margin-bottom: 28px;">';
+    html += '<div style="font-family: Courier, monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; color: #4a4a52;">Phased Rollout</div>';
+
+    phases.forEach(function (phase, idx) {
+      const phaseStart = idx * 60 + 1;
+      const phaseEnd = (idx + 1) * 60;
+      const phaseTotal = phase.reduce(function (s, n) { return s + (costs[n] || 0); }, 0);
+      html += '<div style="margin-bottom: 14px; padding: 12px 14px; border: 2px solid #18181a; background: ' + (idx === 0 ? '#fff1c6' : '#ffe9a8') + ';">';
+      html += '<div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">';
+      html += '<strong style="font-size: 16px;">Phase ' + (idx + 1) + '</strong>';
+      html += '<span style="font-family: Courier, monospace; font-size: 11px; color: #4a4a52;">Days ' + phaseStart + ' to ' + phaseEnd + ' · ' + phaseTotal + ' min/day</span>';
+      html += '</div>';
+      phase.forEach(function (num) {
+        const title = getCardTitle(num);
+        const tag = tierLabel(num);
+        const isN = isNcer(num);
+        html += '<div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-top: 1px dashed rgba(24,24,26,0.25);">';
+        html += '<span style="font-size: 14px;"><strong>' + (isN ? '⊘' : '★') + '</strong> ' + title + '</span>';
+        html += '<span style="font-family: Courier, monospace; font-size: 11px; color: #4a4a52;">' + (costs[num] || 0) + 'm · ' + tag + '</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+    });
+    html += '</div>';
+
+    html += '<div style="font-family: Courier, monospace; font-size: 10px; color: #8a8170; border-top: 1px solid rgba(24,24,26,0.25); padding-top: 12px;">';
+    html += 'Lally et al. (Eur J Soc Psych, 2010) found median ~66 days to automate one habit, with parallel adoption beyond 2 to 3 typically failing. This plan paces additions accordingly.';
+    html += '</div></div>';
+
+    state.items.forEach(function (num, i) {
+      const card = Array.from(document.querySelectorAll('.card')).find(function (c) {
+        const b = c.querySelector('.num-badge');
+        return b && b.textContent.trim() === num;
+      });
+      const title = card ? (card.querySelector('.title') ? card.querySelector('.title').textContent : num) : num;
+      const blurb = card && card.querySelector('.blurb') ? card.querySelector('.blurb').textContent : '';
+      const isN = isNcer(num);
+      html += '<div style="font-family: Georgia, serif; padding: 30px; page-break-before: always;">';
+      html += '<div style="font-family: Courier, monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #8c3a1f; margin-bottom: 6px;">';
+      html += (isN ? 'CUT · NCER' : 'STACK · ' + tierLabel(num)) + ' · ' + (costs[num] || 0) + ' min/day';
+      html += '</div>';
+      html += '<h2 style="font-size: 28px; line-height: 1.1; margin: 0 0 12px; color: #18181a;">' + title + '</h2>';
+      if (blurb) html += '<p style="font-size: 15px; color: #4a4a52; margin-bottom: 18px; font-style: italic;">' + blurb + '</p>';
+      html += '<div style="background: #fff1c6; border: 2px solid #18181a; padding: 14px 16px; margin-bottom: 12px;">';
+      html += '<div style="font-family: Courier, monospace; font-size: 10px; letter-spacing: 0.16em; color: #8c3a1f; margin-bottom: 6px;">IMPLEMENTATION</div>';
+      html += '<div style="font-size: 13.5px; line-height: 1.5;">';
+      html += '<p style="margin: 0 0 6px;"><strong>Trigger (Week 1).</strong> Attach this habit to an existing daily anchor (after coffee, before shower, after lunch). Same time, every day.</p>';
+      html += '<p style="margin: 0 0 6px;"><strong>Process (Weeks 2 to 4).</strong> Build the minimum dose of ' + (costs[num] || 5) + ' min/day. Track on a paper or app log.</p>';
+      html += '<p style="margin: 0 0 6px;"><strong>Tracking (Weeks 3+).</strong> Daily yes/no. Weekly review. Adjust one thing per week.</p>';
+      html += '<p style="margin: 0;"><strong>Graduation (Day 60+).</strong> Habit feels automatic. Move to maintenance mode. Check monthly.</p>';
+      html += '</div></div></div>';
+    });
+
+    // Open a new window with the plan content, then trigger native print-to-PDF.
+    // This is far more reliable than html2pdf/html2canvas across browsers.
+    const w = window.open('', '_blank', 'width=900,height=1100');
+    if (!w) {
+      alert('Pop-up blocked. Allow pop-ups for this page and try again.');
+      return;
+    }
+
+    const pageStyles = '<style>' +
+      '@page { size: letter; margin: 0.5in; }' +
+      'html, body { margin: 0; padding: 0; background: white; color: #18181a; font-family: Georgia, serif; }' +
+      '.no-print { padding: 20px 24px; background: #fff1c6; border-bottom: 3px solid #18181a; position: sticky; top: 0; z-index: 10; }' +
+      '.no-print h2 { margin: 0 0 6px; font-family: Georgia, serif; font-size: 20px; color: #18181a; }' +
+      '.no-print p { margin: 0 0 12px; font-size: 13px; color: #4a4a52; line-height: 1.4; }' +
+      '.no-print button { padding: 12px 22px; background: #ff5b4f; color: white; border: 3px solid #18181a; box-shadow: 4px 4px 0 #18181a; font-family: Georgia, serif; font-size: 16px; font-weight: bold; cursor: pointer; }' +
+      '.no-print button:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #18181a; }' +
+      '.plan-content { padding: 0; }' +
+      '@media print { .no-print { display: none !important; } }' +
+      '</style>';
+
+    const banner = '<div class="no-print">' +
+      '<h2>Your CER Plan is ready</h2>' +
+      '<p>Click the button below to open the print dialog. In the dialog, set <strong>Destination</strong> to <strong>"Save as PDF"</strong> to download.</p>' +
+      '<button onclick="window.print()">Save as PDF</button>' +
+      '</div>';
+
+    const wrappedHtml = '<!doctype html><html><head><meta charset="utf-8" /><title>Your CER Plan ' + dateStr + '</title>' + pageStyles + '</head><body>' + banner + '<div class="plan-content">' + html + '</div></body></html>';
+
+    w.document.open();
+    w.document.write(wrappedHtml);
+    w.document.close();
+
+    // Auto-trigger print dialog after a brief delay to let content render
+    setTimeout(function () {
+      try {
+        w.focus();
+        w.print();
+      } catch (err) {
+        console.error('[PDF] Auto-print failed, user must click the button:', err);
+      }
+    }, 600);
+  }
+
+  function init() {
+    decorateCards();
+    renderCart();
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        if (cartDrawer.classList.contains('open')) { e.preventDefault(); closeDrawer(); }
+        if (onboardOverlay.classList.contains('open')) { e.preventDefault(); closeOnboard(); }
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 </body>
 </html>
